@@ -24,10 +24,15 @@ public class MainProgram extends AppCompatActivity {
                 TextView tSenha = (TextView) findViewById(R.id.inputSenha);
                 String login = tLogin.getText().toString();
                 String senha = tSenha.getText().toString();
-                Intent in = new Intent(MainProgram.this, TelaPrincipal.class);
+                Intent in = new Intent(MainProgram.this, CadastroScreen.class);
+                Intent x = new Intent(MainProgram.this, TelaPrincipal.class);
                 if(login.equals("Admin") && senha.equals("Admin123")){
                     alert("Login realizado com sucesso!");
                     startActivity(in);
+                }
+                if(login.equals("Toin") && senha.equals("123")){
+                    alert("Login realizado com sucesso!");
+                    startActivity(x);
                 }else{
                     alert("Login incorreto!");
                 }
