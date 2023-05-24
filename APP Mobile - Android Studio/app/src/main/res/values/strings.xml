@@ -1,6 +1,8 @@
 <resources>
-    <string name="app_name">Mobile APP</string>
+    <string name="app_name">PRIMO DE RENAN LOCADORA</string>
     <string name="usuario">Usuario</string>
     <string name="senha">Senha</string>
     <string name="login">Login</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/mihome"
+        android:title="Home"
+        android:icon="@drawable/ic_home" />
+    <item
+        android:id="@+id/mifotos"
+        android:title="Fotos"
+        android:icon="@drawable/ic_fotos" />
+    <item
+        android:id="@+id/micadastro"
+        android:title="Cadastro"
+        android:icon="@drawable/ic_cadastro" />
+</menu>
