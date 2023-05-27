@@ -32,6 +32,7 @@ public class MainAdmin extends AppCompatActivity implements BottomNavigationView
             bancoDados.execSQL("CREATE TABLE IF NOT EXISTS veiculos("+" id INTEGER PRIMARY KEY AUTOINCREMENT" +", modelo VARCHAR,placa VARCHAR, cor VARCHAR, quilometragem FLOAT)");
             bancoDados.execSQL("CREATE TABLE IF NOT EXISTS motorista("+" id INTEGER PRIMARY KEY AUTOINCREMENT" +", nome VARCHAR,cnh VARCHAR, cpf VARCHAR, endereco TEXT)");
             bancoDados.close();
+
         }catch (Exception e){
             e.printStackTrace();
         }
