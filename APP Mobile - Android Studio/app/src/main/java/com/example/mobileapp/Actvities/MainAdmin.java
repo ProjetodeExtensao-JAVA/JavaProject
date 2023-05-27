@@ -37,8 +37,6 @@ public class MainAdmin extends AppCompatActivity implements BottomNavigationView
             e.printStackTrace();
         }
     }
-
-
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Fragment fragment = null;
