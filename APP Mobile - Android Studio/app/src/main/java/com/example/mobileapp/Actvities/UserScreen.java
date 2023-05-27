@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import com.example.mobileapp.R;
 
-public class ActvityUserScreen extends AppCompatActivity {
+public class UserScreen extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

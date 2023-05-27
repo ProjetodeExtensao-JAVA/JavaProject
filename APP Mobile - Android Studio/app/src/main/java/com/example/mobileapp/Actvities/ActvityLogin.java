@@ -26,8 +26,8 @@ public class ActvityLogin extends AppCompatActivity {
                 TextView tSenha = (TextView) findViewById(R.id.inputSenha);
                 String login = tLogin.getText().toString();
                 String senha = tSenha.getText().toString();
-                Intent x = new Intent(ActvityLogin.this, ActvityUserScreen.class);
-                Intent y = new Intent(ActvityLogin.this, ActvityMainAdmin.class);
+                Intent x = new Intent(ActvityLogin.this, UserScreen.class);
+                Intent y = new Intent(ActvityLogin.this, MainAdmin.class);
                 if(login.equals("Toin") && senha.equals("123")){
                     alert("Login realizado com sucesso!");
                     startActivity(x);

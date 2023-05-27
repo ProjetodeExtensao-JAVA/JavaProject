@@ -1,9 +1,9 @@
 package com.example.mobileapp.Actvities;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -13,8 +13,9 @@ import com.example.mobileapp.Fragment.HomeFragment;
 import com.example.mobileapp.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class ActvityMainAdmin extends AppCompatActivity implements BottomNavigationView.OnItemSelectedListener {
+public class MainAdmin extends AppCompatActivity implements BottomNavigationView.OnItemSelectedListener {
     BottomNavigationView bottomNavigationView;
+    private SQLiteDatabase bancoDados;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,7 +23,21 @@ public class ActvityMainAdmin extends AppCompatActivity implements BottomNavigat
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnItemSelectedListener(this);
         loadFragment(new HomeFragment());
+        criarBancoDados();
+
     }
+    public void criarBancoDados(){
+        try {
+            bancoDados = openOrCreateDatabase("projetoJava", MODE_PRIVATE, null);
+            bancoDados.execSQL("CREATE TABLE IF NOT EXISTS veiculos("+" id INTEGER PRIMARY KEY AUTOINCREMENT" +", modelo VARCHAR,placa VARCHAR, cor VARCHAR, quilometragem FLOAT)");
+            bancoDados.execSQL("CREATE TABLE IF NOT EXISTS motorista("+" id INTEGER PRIMARY KEY AUTOINCREMENT" +", nome VARCHAR,cnh VARCHAR, cpf VARCHAR, endereco TEXT)");
+            bancoDados.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Fragment fragment = null;

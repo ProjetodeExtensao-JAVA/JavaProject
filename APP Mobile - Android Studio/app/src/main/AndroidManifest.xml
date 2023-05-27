@@ -11,17 +11,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MobileAPP"
         tools:targetApi="31">
+
         <activity
-            android:name=".Actvities.ActvityMainAdmin"
-            android:exported="false" />
+            android:name=".Actvities.MainAdmin"
+            android:exported="true" />
+
         <activity
-            android:name=".MainActivity"
-            android:exported="false" />
-        <activity
-            android:name=".tela_principal_admin"
-            android:exported="false" />
-        <activity
-            android:name=".Actvities.ActvityUserScreen"
+            android:name=".Actvities.UserScreen"
             android:exported="false" />
         <activity
             android:name=".Actvities.ActvityLogin"
