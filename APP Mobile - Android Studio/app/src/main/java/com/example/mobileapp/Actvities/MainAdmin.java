@@ -12,7 +12,7 @@ import com.example.mobileapp.Fragment.FotosFragment;
 import com.example.mobileapp.Fragment.HomeFragment;
 import com.example.mobileapp.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
+//teste
 public class MainAdmin extends AppCompatActivity implements BottomNavigationView.OnItemSelectedListener {
     BottomNavigationView bottomNavigationView;
     private SQLiteDatabase bancoDados;
