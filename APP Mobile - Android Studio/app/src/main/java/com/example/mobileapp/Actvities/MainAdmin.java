@@ -3,15 +3,22 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.mobileapp.Actvities.DataBase.Connect;
 import com.example.mobileapp.Fragment.CadastroFragment;
 import com.example.mobileapp.Fragment.FotosFragment;
 import com.example.mobileapp.Fragment.HomeFragment;
 import com.example.mobileapp.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.*;
 //teste
 public class MainAdmin extends AppCompatActivity implements BottomNavigationView.OnItemSelectedListener {
     BottomNavigationView bottomNavigationView;
@@ -24,14 +31,16 @@ public class MainAdmin extends AppCompatActivity implements BottomNavigationView
         bottomNavigationView.setOnItemSelectedListener(this);
         loadFragment(new HomeFragment());
         criarBancoDados();
-
+        Connect connect = new Connect();
+        String nome = resultSet.getString("nome");
     }
     public void criarBancoDados(){
         try {
-            bancoDados = openOrCreateDatabase("projetoJava", MODE_PRIVATE, null);
-            bancoDados.execSQL("CREATE TABLE IF NOT EXISTS veiculos("+" id INTEGER PRIMARY KEY AUTOINCREMENT" +", modelo VARCHAR,placa VARCHAR, cor VARCHAR, quilometragem FLOAT)");
-            bancoDados.execSQL("CREATE TABLE IF NOT EXISTS motorista("+" id INTEGER PRIMARY KEY AUTOINCREMENT" +", nome VARCHAR,cnh VARCHAR, cpf VARCHAR, endereco TEXT)");
-            bancoDados.close();
+            //bancoDados = openOrCreateDatabase("/DataBase/database.db", MODE_PRIVATE, null);
+            //bancoDados.execSQL("CREATE TABLE IF NOT EXISTS veiculos("+" id INTEGER PRIMARY KEY AUTOINCREMENT" +", modelo VARCHAR,placa VARCHAR, cor VARCHAR, quilometragem FLOAT)");
+            //bancoDados.execSQL("CREATE TABLE IF NOT EXISTS motorista("+" id INTEGER PRIMARY KEY AUTOINCREMENT" +", nome VARCHAR,cnh VARCHAR, cpf VARCHAR, endereco TEXT)");
+            //bancoDados.close();
+            Connect connect = (Connect) DriverManager.getConnection("java/com/example/mobileapp/Actvities/DataBase/database.sqbpro");
 
         }catch (Exception e){
             e.printStackTrace();
