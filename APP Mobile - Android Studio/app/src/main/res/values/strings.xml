@@ -1,8 +1,32 @@
 <resources>
-    <string name="app_name">PRIMO DE RENAN LOCADORA</string>
-    <string name="usuario">Usuario</string>
-    <string name="senha">Senha</string>
-    <string name="login">Login</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!--Configuração String do Aplicativo-->
+    <string name="app_name">Alan locadora</string>
+    <!--Configuração Nome Titulos-->
+    <string name="titulo_cadastro">Cadastrar</string>
+    <string name="titulo_visuaizar">Visualizar</string>
+    <string name="titulo_fotos">Fotos</string>
+    <string name="titulo_sobre">Sobre</string>
+    <string name="titulo_sair">Sair</string>
+    <!--Configuração de Sub Titulos-->
+    <string name="sub_titulo_cliente">Cadastro carro/motorista</string>
+    <string name="sub_titulo_listar">Lista Clientes</string>
+    <string name="sub_titulo_detalhes">Detalhes Cliente</string>
+    <string name="sub_titulo_descricao">Descrição do App</string>
+    <!--Configuração Campo-->
+    <string name="txt_campo_Modelo">Modelo</string>
+    <string name="txt_campo_Placa">Placa</string>
+    <string name="txt_campo_Cor">Cor</string>
+    <string name="txt_campo_Quilometragem">Km inicial</string>
+    <string name="txt_campo_nome">Nome Completo</string>
+    <string name="txt_campo_celular">(xx) xxxxx-xxxx</string>
+    <string name="txt_campo_CPF">CPF</string>
+    <string name="txt_campo_CNH">CNH</string>
+    <string name="txt_campo_endereco">rua 24 de março</string>
+    <string name="txt_campo_observacao">Observação (Opcional)</string>
+    <!--Configuração do Botão-->
+    <string name="btn_cadastro">Cadastro</string>
+    <string name="btn_alterar">Alterar</string>
+    <!--Configuração Texto-->
+    <string name="txt_placa">ABC 1S22</string>
+
 </resources>
