@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="5sp"
     android:fillViewport="true"
-    tools:context=".telas.MainActivity">
+    tools:context=".Actvities.MainAdmin">
 <!--activity Principal-->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

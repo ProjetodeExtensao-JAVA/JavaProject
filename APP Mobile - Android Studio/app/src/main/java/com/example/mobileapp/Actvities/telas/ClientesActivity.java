@@ -67,7 +67,7 @@ public class ClientesActivity extends AppCompatActivity {
         txtCelular = campoCelular.getText().toString();
         txtEndereco = campoEndereco.getText().toString();
 
-        //realizar teste para verificar se os campos não estao vazio
+        //realizar test para verificar se os campos não estao vazio
         //se vazio retorna mensagens na tela para preencher o campo
         //Execeto campo observação
         if (!txtNome.isEmpty()){

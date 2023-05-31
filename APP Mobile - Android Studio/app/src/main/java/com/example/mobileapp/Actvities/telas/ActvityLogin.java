@@ -1,4 +1,4 @@
-package com.example.mobileapp.Actvities;
+package com.example.mobileapp.Actvities.telas;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,7 +16,7 @@ public class ActvityLogin extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login_screen);
+        setContentView(R.layout.activity_tela_login);
 
         Button btnSubmit = (Button) findViewById(R.id.btnSubmit);
         btnSubmit.setOnClickListener(new View.OnClickListener() {
@@ -26,8 +26,8 @@ public class ActvityLogin extends AppCompatActivity {
                 TextView tSenha = (TextView) findViewById(R.id.inputSenha);
                 String login = tLogin.getText().toString();
                 String senha = tSenha.getText().toString();
-                Intent x = new Intent(ActvityLogin.this, UserScreen.class);
-                Intent y = new Intent(ActvityLogin.this, MainAdmin.class);
+                Intent x = new Intent(ActvityLogin.this, usuario_logado.class);
+                Intent y = new Intent(ActvityLogin.this, MainActivity.class);
                 if(login.equals("Toin") && senha.equals("123")){
                     alert("Login realizado com sucesso!");
                     startActivity(x);

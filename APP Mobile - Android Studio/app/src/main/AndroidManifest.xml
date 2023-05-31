@@ -9,22 +9,13 @@
         android:icon="@mipmap/ic_home"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MobileAPP"
         tools:targetApi="31">
 
         <activity
-            android:name=".Actvities.MainAdmin"
-            android:exported="true" />
-
-        <activity
-            android:name=".Actvities.UserScreen"
-            android:exported="false" />
-        <activity
-            android:name=".Actvities.ActvityLogin"
+            android:name=".Actvities.telas.ActvityLogin"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
