@@ -1,4 +1,4 @@
-package br.com.appcadastroclientes.dao;
+package com.example.mobileapp.Actvities.dao;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -9,9 +9,9 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.appcadastroclientes.metodo.MetodoCliente;
-import br.com.appcadastroclientes.model.ModelCliente;
-import br.com.appcadastroclientes.provedor.SQLite;
+import com.example.mobileapp.Actvities.metodo.MetodoCliente;
+import com.example.mobileapp.Actvities.model.ModelCliente;
+import com.example.mobileapp.Actvities.provedor.SQLite;
 
 public class DaoCliente implements MetodoCliente {
     //declaração de variaveis para conectar ao banco de dados sqlite
@@ -87,16 +87,16 @@ public class DaoCliente implements MetodoCliente {
             //declarar variaves para receber os atributos da classe cliente
             String txtModelo, txtPlaca, txtCor, txtQuilometragem,
                     txtNome,txtCPF,txtCNH, txtCelular, txtEndereco;
-            txtModelo = cursor.getString(cursor.getColumnIndex("cliModelo"));
-            txtPlaca = cursor.getString(cursor.getColumnIndex("cliPlaca"));
-            txtCor = cursor.getString(cursor.getColumnIndex("cliCor"));
-            txtQuilometragem = cursor.getString(cursor.getColumnIndex("cliQuilometragem"));
+            txtModelo = cursor.getString(cursor.getColumnIndexOrThrow("cliModelo"));
+            txtPlaca = cursor.getString(cursor.getColumnIndexOrThrow("cliPlaca"));
+            txtCor = cursor.getString(cursor.getColumnIndexOrThrow("cliCor"));
+            txtQuilometragem = cursor.getString(cursor.getColumnIndexOrThrow("cliQuilometragem"));
 
-            txtNome = cursor.getString(cursor.getColumnIndex("cliNome"));
-            txtCPF = cursor.getString(cursor.getColumnIndex("cliCPF"));
-            txtCNH = cursor.getString(cursor.getColumnIndex("cliCNH"));
-            txtCelular = cursor.getString(cursor.getColumnIndex("cliCelular"));
-            txtEndereco = cursor.getString(cursor.getColumnIndex("cliEndereco"));
+            txtNome = cursor.getString(cursor.getColumnIndexOrThrow("cliNome"));
+            txtCPF = cursor.getString(cursor.getColumnIndexOrThrow("cliCPF"));
+            txtCNH = cursor.getString(cursor.getColumnIndexOrThrow("cliCNH"));
+            txtCelular = cursor.getString(cursor.getColumnIndexOrThrow("cliCelular"));
+            txtEndereco = cursor.getString(cursor.getColumnIndexOrThrow("cliEndereco"));
 
             dados.setCliModelo(txtModelo);
             dados.setCliPlaca(txtPlaca);

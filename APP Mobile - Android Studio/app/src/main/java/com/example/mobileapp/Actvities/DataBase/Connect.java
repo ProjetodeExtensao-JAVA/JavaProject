@@ -13,7 +13,7 @@ public class Connect {
         try {
             // parâmetros da DB
             // Windows
-            String url = "java/com/example/mobileapp/Actvities/DataBase/database.sqbpro";
+            String url = "java/com/example/mobileapp/Actvities/DataBase/sqlite-jdbc-3.42.0.0.jar";
             // Linux
             //criando conexão
             conn = DriverManager.getConnection(url);

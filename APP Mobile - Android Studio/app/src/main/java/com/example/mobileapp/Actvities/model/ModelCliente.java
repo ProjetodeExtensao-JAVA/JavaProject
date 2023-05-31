@@ -1,4 +1,4 @@
-package br.com.appcadastroclientes.model;
+package com.example.mobileapp.Actvities.model;
 
 import java.io.Serializable;
 

@@ -1,8 +1,8 @@
-package br.com.appcadastroclientes.metodo;
+package com.example.mobileapp.Actvities.metodo;
 
 import java.util.List;
 
-import br.com.appcadastroclientes.model.ModelCliente;
+import com.example.mobileapp.Actvities.model.ModelCliente;
 
 public interface MetodoCliente {
     //metodos que serao implementados de forma automatica no DaoCliente

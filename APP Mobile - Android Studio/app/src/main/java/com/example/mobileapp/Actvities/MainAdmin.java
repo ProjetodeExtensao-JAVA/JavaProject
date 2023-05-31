@@ -9,7 +9,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.example.mobileapp.Actvities.DataBase.Connect;
-import com.example.mobileapp.Fragment.CadastroFragment;
+
 import com.example.mobileapp.Fragment.FotosFragment;
 import com.example.mobileapp.Fragment.HomeFragment;
 import com.example.mobileapp.R;
@@ -32,14 +32,14 @@ public class MainAdmin extends AppCompatActivity implements BottomNavigationView
         loadFragment(new HomeFragment());
         criarBancoDados();
         Connect connect = new Connect();
-        String nome = resultSet.getString("nome");
+
     }
     public void criarBancoDados(){
         try {
-            //bancoDados = openOrCreateDatabase("/DataBase/database.db", MODE_PRIVATE, null);
-            //bancoDados.execSQL("CREATE TABLE IF NOT EXISTS veiculos("+" id INTEGER PRIMARY KEY AUTOINCREMENT" +", modelo VARCHAR,placa VARCHAR, cor VARCHAR, quilometragem FLOAT)");
-            //bancoDados.execSQL("CREATE TABLE IF NOT EXISTS motorista("+" id INTEGER PRIMARY KEY AUTOINCREMENT" +", nome VARCHAR,cnh VARCHAR, cpf VARCHAR, endereco TEXT)");
-            //bancoDados.close();
+            bancoDados = openOrCreateDatabase("/DataBase/database.db", MODE_PRIVATE, null);
+            bancoDados.execSQL("CREATE TABLE IF NOT EXISTS veiculos("+" id INTEGER PRIMARY KEY AUTOINCREMENT" +", modelo VARCHAR,placa VARCHAR, cor VARCHAR, quilometragem FLOAT)");
+            bancoDados.execSQL("CREATE TABLE IF NOT EXISTS motorista("+" id INTEGER PRIMARY KEY AUTOINCREMENT" +", nome VARCHAR,cnh VARCHAR, cpf VARCHAR, endereco TEXT)");
+            bancoDados.close();
             Connect connect = (Connect) DriverManager.getConnection("java/com/example/mobileapp/Actvities/DataBase/database.sqbpro");
 
         }catch (Exception e){
@@ -57,7 +57,7 @@ public class MainAdmin extends AppCompatActivity implements BottomNavigationView
                 fragment = new FotosFragment();
                 break;
             case R.id.micadastro:
-                fragment = new CadastroFragment();
+              //  fragment = new teste();
                 break;
         }
         if (fragment != null){

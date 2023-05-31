@@ -1,10 +1,10 @@
-package br.com.appcadastroclientes.telas;
+package com.example.mobileapp.Actvities.telas;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import br.com.appcadastroclientes.R;
+import com.example.mobileapp.R;
 
 public class usuario_logado extends AppCompatActivity {
 

@@ -1,10 +1,10 @@
-package br.com.appcadastroclientes.telas;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.mobileapp.Actvities.telas;
 
 import android.os.Bundle;
 
-import br.com.appcadastroclientes.R;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.mobileapp.R;
 
 public class tela_login extends AppCompatActivity {
 

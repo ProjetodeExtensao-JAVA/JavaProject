@@ -1,4 +1,4 @@
-package br.com.appcadastroclientes.telas;
+package com.example.mobileapp.Actvities.telas;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,8 +7,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import br.com.appcadastroclientes.R;
-import br.com.appcadastroclientes.model.ModelCliente;
+import com.example.mobileapp.R;
+import com.example.mobileapp.Actvities.model.ModelCliente;
 
 public class ClienteDetalhesActivity extends AppCompatActivity {
     //Classe java p/ exibir detalhes do cliente

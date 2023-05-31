@@ -1,4 +1,4 @@
-package br.com.appcadastroclientes.telas;
+package com.example.mobileapp.Actvities.telas;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -6,8 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
-import android.view.Menu;
-import android.view.MenuItem;
+
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,9 +15,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import br.com.appcadastroclientes.R;
-import br.com.appcadastroclientes.dao.DaoCliente;
-import br.com.appcadastroclientes.model.ModelCliente;
+import com.example.mobileapp.R;
+import com.example.mobileapp.Actvities.dao.DaoCliente;
+import com.example.mobileapp.Actvities.model.ModelCliente;
 
 public class ClientesActivity extends AppCompatActivity {
     //Classe java para entrada de dados: cadastro de cliente

@@ -1,4 +1,4 @@
-package br.com.appcadastroclientes.help;
+package com.example.mobileapp.Actvities.help;
 
 import android.content.Context;
 

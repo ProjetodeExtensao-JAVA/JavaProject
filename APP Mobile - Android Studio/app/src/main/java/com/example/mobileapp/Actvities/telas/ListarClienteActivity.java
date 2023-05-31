@@ -1,4 +1,4 @@
-package br.com.appcadastroclientes.telas;
+package com.example.mobileapp.Actvities.telas;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,10 +13,10 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.appcadastroclientes.R;
-import br.com.appcadastroclientes.adapter.AdapterCliente;
-import br.com.appcadastroclientes.dao.DaoCliente;
-import br.com.appcadastroclientes.model.ModelCliente;
+import com.example.mobileapp.R;
+import com.example.mobileapp.Actvities.adapter.AdapterCliente;
+import com.example.mobileapp.Actvities.dao.DaoCliente;
+import com.example.mobileapp.Actvities.model.ModelCliente;
 
 public class ListarClienteActivity extends AppCompatActivity {
     //Classe Java, p/ lista clientes cadastrados

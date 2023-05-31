@@ -1,4 +1,4 @@
-package br.com.appcadastroclientes.adapter;
+package com.example.mobileapp.Actvities.adapter;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -18,11 +18,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-import br.com.appcadastroclientes.R;
-import br.com.appcadastroclientes.dao.DaoCliente;
-import br.com.appcadastroclientes.model.ModelCliente;
-import br.com.appcadastroclientes.telas.ClienteDetalhesActivity;
-import br.com.appcadastroclientes.telas.ClientesActivity;
+import com.example.mobileapp.R;
+import com.example.mobileapp.Actvities.dao.DaoCliente;
+import com.example.mobileapp.Actvities.model.ModelCliente;
+import com.example.mobileapp.Actvities.telas.ClienteDetalhesActivity;
+import com.example.mobileapp.Actvities.telas.ClientesActivity;
 
 public class AdapterCliente extends RecyclerView.Adapter<AdapterCliente.MyViewHolder>{
     private List<ModelCliente> listCliente;

@@ -1,4 +1,4 @@
-package br.com.appcadastroclientes.provedor;
+package com.example.mobileapp.Actvities.provedor;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

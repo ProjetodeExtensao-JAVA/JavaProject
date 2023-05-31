@@ -1,4 +1,4 @@
-package br.com.appcadastroclientes.telas;
+package com.example.mobileapp.Actvities.telas;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,7 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import br.com.appcadastroclientes.R;
+import com.example.mobileapp.R;
 
 public class MainActivity extends AppCompatActivity {
     //Classe Java Principal do App
@@ -50,24 +50,5 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, ListarClienteActivity.class));
             }
         });
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.idMainMenuSobre:
-                startActivity(new Intent(MainActivity.this, SobreActivity.class));
-                break;
-            case R.id.idSairApp:
-                finish();
-                break;
-        }
-        return super.onOptionsItemSelected(item);
     }
 }
