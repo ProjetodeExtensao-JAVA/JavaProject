@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5sp"
+    android:background="@drawable/personalizar_borda"
+    android:orientation="horizontal"
+    android:paddingStart="@dimen/margem_right"
+    android:paddingEnd="@dimen/margem_right">
+
+    <TextView
+        android:id="@+id/idTxtCarro"
+        android:layout_width="7dp"
+        android:layout_height="40sp"
+        android:layout_weight="2"
+        android:gravity="center|start"
+        android:paddingStart="@dimen/paddgin_start"
+        android:paddingEnd="@dimen/paddgin_end"
+        android:text="@string/txt_placa"
+        android:textColor="@android:color/black"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/idTxtQuilometragem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:text="10.000 KM"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/idTxtExcluirCarro"
+        android:layout_width="1dp"
+        android:layout_height="40sp"
+        android:layout_weight="1"
+        android:drawableEnd="@drawable/ic_excluir_black_24dp"
+        android:gravity="center" />
+</LinearLayout>
