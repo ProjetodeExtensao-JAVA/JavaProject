@@ -38,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, ListarClienteActivity.class));
             }
         });
-        //evento de clique encaminha para Lista para o user escolher um user cadastro pra atualizar
         linearAlterar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

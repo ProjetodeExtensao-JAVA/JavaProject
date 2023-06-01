@@ -111,7 +111,6 @@ public class DaoCliente implements MetodoCliente {
 
             list.add(dados);
         }
-
         return list;
     }
 }

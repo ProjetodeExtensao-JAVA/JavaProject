@@ -17,10 +17,10 @@
 
         <TextView
             android:id="@+id/textView3"
-            android:layout_width="323dp"
-            android:layout_height="75dp"
+            android:layout_width="329dp"
+            android:layout_height="91dp"
             android:gravity="center"
-            android:text="   Seja bem vindo Alan, Oque vamos fazer?"
+            android:text="Seja bem vindo Alan, Oque vamos fazer?"
             android:textSize="@dimen/tamanho_titulo"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/idLinearLayout01"

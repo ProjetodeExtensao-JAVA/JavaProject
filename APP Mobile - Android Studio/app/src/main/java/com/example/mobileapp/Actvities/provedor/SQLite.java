@@ -39,7 +39,6 @@ public class SQLite extends SQLiteOpenHelper {
         }
 
     }
-
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("create table if not exists "+ TABELA_CLIENTE);
