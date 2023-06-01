@@ -24,7 +24,7 @@
             android:layout_marginTop="160dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="4dp"
-            android:background="@drawable/personalizar_borda"
+
             android:orientation="horizontal"
             app:layout_constraintBottom_toTopOf="@+id/idLinearLayout02"
             app:layout_constraintEnd_toEndOf="parent"
