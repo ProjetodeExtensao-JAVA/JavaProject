@@ -25,7 +25,7 @@
             android:visibility="visible" />
 
         <EditText
-            android:id="@+id/inputLogin"
+            android:id="@+id/inputLoginCPF"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -35,7 +35,7 @@
             android:inputType="text" />
 
         <EditText
-            android:id="@+id/inputSenha"
+            android:id="@+id/inputSenhaCNH"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -45,7 +45,7 @@
             android:inputType="textPassword" />
 
         <Button
-            android:id="@+id/btnSubmit"
+            android:id="@+id/btnSubmitLogin"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
