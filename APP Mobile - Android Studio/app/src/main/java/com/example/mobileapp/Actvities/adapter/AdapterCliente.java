@@ -50,8 +50,8 @@ public class AdapterCliente extends RecyclerView.Adapter<AdapterCliente.MyViewHo
     public  void onBindViewHolder(@NonNull final MyViewHolder myViewHolder, @SuppressLint("RecyclerView") final int i) {
         final ModelCliente cliente = listCliente.get(i);
         //retorna o nome do cliente
-        myViewHolder.placaCarro.setText(cliente.getCliPlaca());
-        myViewHolder.quilometragem.setText(cliente.getCliQuilometragem());
+        myViewHolder.nome.setText(cliente.getCliPlaca());
+        myViewHolder.cpf.setText(cliente.getCliQuilometragem());
         //evento para setar detalhes clientes
         //excluir cliente
         myViewHolder.excluirCarro.setOnClickListener(new View.OnClickListener() {
@@ -90,17 +90,17 @@ public class AdapterCliente extends RecyclerView.Adapter<AdapterCliente.MyViewHo
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         Context activity;
-        TextView quilometragem;
+        TextView cpf;
 
-        TextView placaCarro;
+        TextView nome;
 
         TextView excluirCarro;
         //
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             activity = itemView.getContext();
-            quilometragem = itemView.findViewById(R.id.idTxtQuilometragem);
-            placaCarro = itemView.findViewById(R.id.idTxtCarro);
+            cpf = itemView.findViewById(R.id.idTxtCPF);
+            nome = itemView.findViewById(R.id.idTxtNome);
             excluirCarro = itemView.findViewById(R.id.idTxtExcluirCarro);
         }
     }

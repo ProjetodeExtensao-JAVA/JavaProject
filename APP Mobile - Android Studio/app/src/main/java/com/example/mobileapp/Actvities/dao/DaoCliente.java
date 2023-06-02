@@ -48,7 +48,7 @@ public class DaoCliente implements MetodoCliente {
             //gravar na tabela clientes
             //passando no paramentro o nome da tabela e os valores
             sqlEscrever.insert(SQLite.TABELA_CLIENTE, null, clientes);
-            sqlEscrever.insert(SQLite.TABELA_CARRO,null, carros);
+            //sqlEscrever.insert(SQLite.TABELA_CARRO,null, carros);
             //retorna verdadeiro caso a inserir seja realizado com sucesso
             return true;
         }catch (Exception e){
@@ -63,7 +63,7 @@ public class DaoCliente implements MetodoCliente {
             String[] cpf = {mCliente.getCliCPF().toString()};
             String[] placa  = {mCliente.getCliPlaca().toString()};
             sqlEscrever.delete(SQLite.TABELA_CLIENTE,"cliCPF = ?", cpf);
-            sqlEscrever.delete(SQLite.TABELA_CARRO,"cliPlaca = ?", placa);
+            //sqlEscrever.delete(SQLite.TABELA_CARRO,"cliPlaca = ?", placa);
             return true;
         }catch (Exception e){
             e.printStackTrace();
@@ -77,31 +77,35 @@ public class DaoCliente implements MetodoCliente {
         //Vamos precisar:
         List<ModelCliente> list = new ArrayList<>();
         //vamos para o camando sqlite e atributo a uma strindo
-        String sqlSelect = "select *from "+ SQLite.TABELA_CLIENTE + SQLite.TABELA_CARRO+";";
+        String sqlSelect = "select *from "+ SQLite.TABELA_CLIENTE+";";
+        //String sqlSelect2 = "select *from "+ SQLite.TABELA_CARRO+";";
         Cursor cursor = sqlLeitura.rawQuery(sqlSelect, null);
+        //Cursor cursor2 = sqlLeitura.rawQuery(sqlSelect2, null);
 
         //iniciar um while para percorrer os campos da tabela
+//        while(cursor2.moveToNext()){
+//            ModelCliente dados = new ModelCliente();
+//            String txtModelo, txtPlaca, txtCor, txtQuilometragem;
+//            txtModelo = cursor2.getString(cursor2.getColumnIndexOrThrow("cliModelo"));
+//            txtPlaca = cursor2.getString(cursor2.getColumnIndexOrThrow("cliPlaca"));
+//            txtCor = cursor2.getString(cursor2.getColumnIndexOrThrow("cliCor"));
+//            txtQuilometragem = cursor2.getString(cursor2.getColumnIndexOrThrow("cliQuilometragem"));
+//
+//            dados.setCliModelo(txtModelo);
+//            dados.setCliPlaca(txtPlaca);
+//            dados.setCliCor(txtCor);
+//            dados.setCliQuilometragem(txtQuilometragem);
+//        }
         while (cursor.moveToNext()){
             ModelCliente dados = new ModelCliente();
-
             //declarar variaves para receber os atributos da classe cliente
-            String txtModelo, txtPlaca, txtCor, txtQuilometragem,
-                    txtNome,txtCPF,txtCNH, txtCelular, txtEndereco;
-            txtModelo = cursor.getString(cursor.getColumnIndexOrThrow("cliModelo"));
-            txtPlaca = cursor.getString(cursor.getColumnIndexOrThrow("cliPlaca"));
-            txtCor = cursor.getString(cursor.getColumnIndexOrThrow("cliCor"));
-            txtQuilometragem = cursor.getString(cursor.getColumnIndexOrThrow("cliQuilometragem"));
+            String txtNome,txtCPF,txtCNH, txtCelular, txtEndereco;
 
             txtNome = cursor.getString(cursor.getColumnIndexOrThrow("cliNome"));
             txtCPF = cursor.getString(cursor.getColumnIndexOrThrow("cliCPF"));
             txtCNH = cursor.getString(cursor.getColumnIndexOrThrow("cliCNH"));
             txtCelular = cursor.getString(cursor.getColumnIndexOrThrow("cliCelular"));
             txtEndereco = cursor.getString(cursor.getColumnIndexOrThrow("cliEndereco"));
-
-            dados.setCliModelo(txtModelo);
-            dados.setCliPlaca(txtPlaca);
-            dados.setCliCor(txtCor);
-            dados.setCliQuilometragem(txtQuilometragem);
 
             dados.setCliNome(txtNome);
             dados.setCliCPF(txtCPF);

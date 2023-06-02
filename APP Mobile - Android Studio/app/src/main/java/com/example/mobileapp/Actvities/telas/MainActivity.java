@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //iniciar componentes
         inicializarComponentes();
+
         //evento de clique adicionar
         linearCadastro.setOnClickListener(new View.OnClickListener() {
             @Override

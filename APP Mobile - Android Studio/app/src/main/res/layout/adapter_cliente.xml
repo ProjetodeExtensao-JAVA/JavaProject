@@ -10,7 +10,7 @@
     android:paddingEnd="@dimen/margem_right">
 
     <TextView
-        android:id="@+id/idTxtCarro"
+        android:id="@+id/idTxtNome"
         android:layout_width="7dp"
         android:layout_height="40sp"
         android:layout_weight="2"
@@ -23,7 +23,7 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/idTxtQuilometragem"
+        android:id="@+id/idTxtCPF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="2"
