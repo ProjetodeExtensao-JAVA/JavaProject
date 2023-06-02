@@ -57,7 +57,7 @@ public class ListarClienteActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //inicializar componentes: metodo de inicializar
         inicializarComponentes();
-        carregarListacliente();
+        //carregarListacliente();
     }
     @Override
     protected void onStart() {
