@@ -30,17 +30,26 @@ public class DaoCliente implements MetodoCliente {
     public boolean cadastroCliente(ModelCliente mCliente) {
         //Classe Instancia para inserir dados na base de dados
         ContentValues clientes = new ContentValues();
+        ContentValues carros = new ContentValues();
+        //passar String key para inserir nos campos na tabela clientes
+        //key declarada ao cria a tabela cliente: campos da tabela clientes
+        carros.put("cliModelo", mCliente.getCliModelo());
+        carros.put("cliPlaca", mCliente.getCliPlaca());
+        carros.put("cliCor", mCliente.getCliCor());
+        carros.put("cliQuilometragem", mCliente.getCliQuilometragem());
+
         clientes.put("cliNome", mCliente.getCliNome());
         clientes.put("cliCPF", mCliente.getCliCPF());
-        clientes.put("cliPlaca", mCliente.getCliPlaca());
+        clientes.put("cliCNH", mCliente.getCliCNH());
         clientes.put("cliCelular", mCliente.getCliCelular());
-        clientes.put("cliModelo", mCliente.getCliModelo());
-        clientes.put("cliQuilometragem", mCliente.getCliQuilometragem());
+        clientes.put("cliEndereco", mCliente.getCliEndereco());
         //lanchar um try caso return o false lance uma excption para tratar o erro
         try {
             //gravar na tabela clientes
             //passando no paramentro o nome da tabela e os valores
             sqlEscrever.insert(SQLite.TABELA_CLIENTE, null, clientes);
+            //sqlEscrever.insert(SQLite.TABELA_CARRO,null, carros);
+            //retorna verdadeiro caso a inserir seja realizado com sucesso
             return true;
         }catch (Exception e){
             e.printStackTrace();
@@ -52,7 +61,9 @@ public class DaoCliente implements MetodoCliente {
     public boolean deleteCliente(ModelCliente mCliente) {
         try {
             String[] cpf = {mCliente.getCliCPF().toString()};
-            sqlEscrever.delete(SQLite.TABELA_CLIENTE,"cliPlaca = ?", cpf);
+            String[] placa  = {mCliente.getCliPlaca().toString()};
+            sqlEscrever.delete(SQLite.TABELA_CLIENTE,"cliCPF = ?", cpf);
+            //sqlEscrever.delete(SQLite.TABELA_CARRO,"cliPlaca = ?", placa);
             return true;
         }catch (Exception e){
             e.printStackTrace();
@@ -64,31 +75,46 @@ public class DaoCliente implements MetodoCliente {
     public List<ModelCliente> listarCliente() {
         //declarar variaveis para realizar a operação de listar
         //Vamos precisar:
-        List<ModelCliente> lista = new ArrayList<>();
+        List<ModelCliente> list = new ArrayList<>();
         //vamos para o camando sqlite e atributo a uma strindo
         String sqlSelect = "select *from "+ SQLite.TABELA_CLIENTE+";";
+        //String sqlSelect2 = "select *from "+ SQLite.TABELA_CARRO+";";
         Cursor cursor = sqlLeitura.rawQuery(sqlSelect, null);
+        //Cursor cursor2 = sqlLeitura.rawQuery(sqlSelect2, null);
+
+        //iniciar um while para percorrer os campos da tabela
+//        while(cursor2.moveToNext()){
+//            ModelCliente dados = new ModelCliente();
+//            String txtModelo, txtPlaca, txtCor, txtQuilometragem;
+//            txtModelo = cursor2.getString(cursor2.getColumnIndexOrThrow("cliModelo"));
+//            txtPlaca = cursor2.getString(cursor2.getColumnIndexOrThrow("cliPlaca"));
+//            txtCor = cursor2.getString(cursor2.getColumnIndexOrThrow("cliCor"));
+//            txtQuilometragem = cursor2.getString(cursor2.getColumnIndexOrThrow("cliQuilometragem"));
+//
+//            dados.setCliModelo(txtModelo);
+//            dados.setCliPlaca(txtPlaca);
+//            dados.setCliCor(txtCor);
+//            dados.setCliQuilometragem(txtQuilometragem);
+//        }
         while (cursor.moveToNext()){
             ModelCliente dados = new ModelCliente();
             //declarar variaves para receber os atributos da classe cliente
-            String txtNome,txtCPF,txtModelo, txtCelular, txtQuilometragem, txtPlaca;
-            txtPlaca = cursor.getString(cursor.getColumnIndexOrThrow("cliPlaca"));
-            txtModelo = cursor.getString(cursor.getColumnIndexOrThrow("cliModelo"));
-            txtQuilometragem = cursor.getString(cursor.getColumnIndexOrThrow("cliQuilometragem"));
+            String txtNome,txtCPF,txtCNH, txtCelular, txtEndereco;
+
             txtNome = cursor.getString(cursor.getColumnIndexOrThrow("cliNome"));
             txtCPF = cursor.getString(cursor.getColumnIndexOrThrow("cliCPF"));
+            txtCNH = cursor.getString(cursor.getColumnIndexOrThrow("cliCNH"));
             txtCelular = cursor.getString(cursor.getColumnIndexOrThrow("cliCelular"));
+            txtEndereco = cursor.getString(cursor.getColumnIndexOrThrow("cliEndereco"));
 
-
-            dados.setCliPlaca(txtPlaca);
-            dados.setCliModelo(txtModelo);
-            dados.setCliQuilometragem(txtQuilometragem);
             dados.setCliNome(txtNome);
             dados.setCliCPF(txtCPF);
+            dados.setCliCNH(txtCNH);
             dados.setCliCelular(txtCelular);
+            dados.setCliEndereco(txtEndereco);
 
-            lista.add(dados);
+            list.add(dados);
         }
-        return lista;
+        return list;
     }
 }
