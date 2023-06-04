@@ -50,8 +50,8 @@ public class AdapterCliente extends RecyclerView.Adapter<AdapterCliente.MyViewHo
     public  void onBindViewHolder(@NonNull final MyViewHolder myViewHolder, @SuppressLint("RecyclerView") final int i) {
         final ModelCliente cliente = listCliente.get(i);
         //retorna o nome do cliente
-        myViewHolder.nome.setText(cliente.getCliPlaca());
-        myViewHolder.cpf.setText(cliente.getCliQuilometragem());
+        myViewHolder.nome.setText(cliente.getCliNome());
+        myViewHolder.cpf.setText(cliente.getCliCPF());
         //evento para setar detalhes clientes
         //excluir cliente
         myViewHolder.excluirCarro.setOnClickListener(new View.OnClickListener() {
@@ -67,7 +67,7 @@ public class AdapterCliente extends RecyclerView.Adapter<AdapterCliente.MyViewHo
                         DaoCliente daoCliente = new DaoCliente(context);
                         Toast.makeText(context, "Delete", Toast.LENGTH_LONG).show();
                         ModelCliente deleteCliente = listCliente.get(i);
-                        deleteCliente.getCliPlaca();
+                        deleteCliente.getCliCPF();
                         daoCliente.deleteCliente(deleteCliente);
                         listCliente.remove(i);
                         notifyItemRemoved(i);
