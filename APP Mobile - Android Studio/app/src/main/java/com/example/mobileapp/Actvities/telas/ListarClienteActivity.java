@@ -35,16 +35,12 @@ public class ListarClienteActivity extends AppCompatActivity {
     public void carregarListacliente() {
         //lista clientes do banco de dados
         DaoCliente daoCliente = new DaoCliente(getBaseContext());
-        //Cliente leituraCliente = new Cliente();
-        //leituraCliente.setCliNome("Maria");
-        //listCliente.add(leituraCliente);
         listCliente = daoCliente.listarCliente();
         //exibir lista de cliente no RecyclerView
         //configurar um adapter
         adapterCliente = new AdapterCliente(listCliente, getApplicationContext());
         //configurar recycleriew
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-        // GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         recyclerViewCliente.setLayoutManager(layoutManager);
         recyclerViewCliente.setHasFixedSize(true);
         recyclerViewCliente.addItemDecoration(new DividerItemDecoration(getApplicationContext(), LinearLayout.VERTICAL));
@@ -57,7 +53,7 @@ public class ListarClienteActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //inicializar componentes: metodo de inicializar
         inicializarComponentes();
-        carregarListacliente();
+        //carregarListacliente();
     }
     @Override
     protected void onStart() {

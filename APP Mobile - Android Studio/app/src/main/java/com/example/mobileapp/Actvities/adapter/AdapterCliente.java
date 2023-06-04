@@ -47,11 +47,12 @@ public class AdapterCliente extends RecyclerView.Adapter<AdapterCliente.MyViewHo
     /*Método que recebe o ViewHolder e a posição da lista. Aqui é recuperado o objeto da lista
     /*de Objetos pela posição e associado à ViewHolder. É onde a mágica acontece!  */
     @Override
-    public  void onBindViewHolder(@NonNull final MyViewHolder myViewHolder, @SuppressLint("RecyclerView") final int i) {
-        final ModelCliente cliente = listCliente.get(i);
+    public  void onBindViewHolder(@NonNull final MyViewHolder myViewHolder, final int i) {
+        final ModelCliente dados = listCliente.get(i);
         //retorna o nome do cliente
-        myViewHolder.nome.setText(cliente.getCliPlaca());
-        myViewHolder.cpf.setText(cliente.getCliQuilometragem());
+        myViewHolder.modelo.setText(dados.getCliModelo());
+        myViewHolder.quilometragem.setText(dados.getCliQuilometragem());
+        myViewHolder.placa.setText(dados.getCliPlaca());
         //evento para setar detalhes clientes
         //excluir cliente
         myViewHolder.excluirCarro.setOnClickListener(new View.OnClickListener() {
@@ -76,8 +77,6 @@ public class AdapterCliente extends RecyclerView.Adapter<AdapterCliente.MyViewHo
                 });
                 builder.setNegativeButton("Cancelar!", null);
                 builder.create().show();
-
-
             }
         });
 
@@ -85,22 +84,21 @@ public class AdapterCliente extends RecyclerView.Adapter<AdapterCliente.MyViewHo
     //metodo para verificar quantos item a na lista
     @Override
     public int getItemCount() {
-            return this.listCliente.size();
+        return this.listCliente.size();
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         Context activity;
-        TextView cpf;
-
-        TextView nome;
-
+        TextView placa;
+        TextView quilometragem;
+        TextView modelo;
         TextView excluirCarro;
-        //
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             activity = itemView.getContext();
-            cpf = itemView.findViewById(R.id.idTxtCPF);
-            nome = itemView.findViewById(R.id.idTxtNome);
+            placa = itemView.findViewById(R.id.idTxtPlaca);
+            modelo = itemView.findViewById(R.id.idTxtModelo);
+            quilometragem = itemView.findViewById(R.id.idQuilometragem);
             excluirCarro = itemView.findViewById(R.id.idTxtExcluirCarro);
         }
     }

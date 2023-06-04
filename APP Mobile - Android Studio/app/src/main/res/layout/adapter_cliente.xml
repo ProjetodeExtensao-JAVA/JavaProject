@@ -10,7 +10,7 @@
     android:paddingEnd="@dimen/margem_right">
 
     <TextView
-        android:id="@+id/idTxtNome"
+        android:id="@+id/idTxtModelo"
         android:layout_width="7dp"
         android:layout_height="40sp"
         android:layout_weight="2"
@@ -23,13 +23,22 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/idTxtCPF"
-        android:layout_width="wrap_content"
+        android:id="@+id/idTxtPlaca"
+        android:layout_width="1dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:text="XXXZZZZ"
+        android:textColor="@android:color/black"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/idTxtQuilometragem"
+        android:layout_width="1dp"
         android:layout_height="wrap_content"
         android:layout_weight="2"
         android:text="10.000 KM"
         android:textColor="@android:color/black"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
+
 
     <TextView
         android:id="@+id/idTxtExcluirCarro"

@@ -39,7 +39,7 @@
             android:layout_width="0dp"
             android:layout_height="@dimen/edit_altura"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="12dp"
             android:layout_marginEnd="8dp"
             android:background="@drawable/personalizar_borda"
             android:ems="10"
@@ -55,31 +55,11 @@
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
         <EditText
-            android:id="@+id/idCor"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/edit_altura"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:ems="10"
-            android:background="@drawable/personalizar_borda"
-            android:hint="@string/txt_campo_Cor"
-            android:inputType="textPersonName"
-            android:paddingStart="@dimen/paddgin_start"
-            android:paddingEnd="@dimen/paddgin_end"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/texto_padrao"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/idPlaca" />
-
-        <EditText
             android:id="@+id/idModelo"
             android:layout_width="0dp"
             android:layout_height="@dimen/edit_altura"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="36dp"
+            android:layout_marginTop="12dp"
             android:layout_marginEnd="8dp"
             android:background="@drawable/personalizar_borda"
             android:ems="10"
@@ -90,9 +70,9 @@
             android:textColor="@android:color/black"
             android:textSize="@dimen/texto_padrao"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
 
         <EditText
             android:id="@+id/idPlaca"
@@ -119,7 +99,7 @@
             android:layout_width="0dp"
             android:layout_height="@dimen/edit_altura"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:background="@drawable/personalizar_borda"
             android:ems="10"
@@ -132,14 +112,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/idCor" />
+            app:layout_constraintTop_toBottomOf="@+id/idPlaca" />
 
         <EditText
             android:id="@+id/idCPF"
             android:layout_width="0dp"
             android:layout_height="@dimen/edit_altura"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="12dp"
             android:layout_marginEnd="8dp"
             android:background="@drawable/personalizar_borda"
             android:ems="10"
@@ -153,29 +133,11 @@
             app:layout_constraintTop_toBottomOf="@+id/idNome" />
 
         <EditText
-            android:id="@+id/idCNH"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/edit_altura"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/personalizar_borda"
-            android:ems="10"
-            android:hint="@string/txt_campo_CNH"
-            android:inputType="number"
-            android:paddingStart="@dimen/paddgin_start"
-            android:paddingEnd="@dimen/paddgin_end"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/idCPF" />
-
-        <EditText
             android:id="@+id/idCelular"
             android:layout_width="0dp"
             android:layout_height="@dimen/edit_altura"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:background="@drawable/personalizar_borda"
             android:ems="10"
@@ -188,27 +150,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/idCNH" />
-
-        <EditText
-            android:id="@+id/idEndereco"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/edit_altura"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/personalizar_borda"
-            android:ems="10"
-            android:hint="@string/txt_campo_endereco"
-            android:inputType="textPersonName"
-            android:paddingStart="@dimen/paddgin_start"
-            android:paddingEnd="@dimen/paddgin_end"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/texto_padrao"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/idCelular" />
+            app:layout_constraintTop_toBottomOf="@+id/idCPF" />
 
         <Button
             android:id="@+id/idBtnCadastro"
@@ -216,7 +158,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
 
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:background="@drawable/personalizar_borda"
             android:onClick="cadastroCliente"
@@ -226,7 +168,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/idEndereco" />
+            app:layout_constraintTop_toBottomOf="@+id/idCelular" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

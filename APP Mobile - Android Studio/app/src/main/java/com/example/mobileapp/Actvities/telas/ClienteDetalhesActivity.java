@@ -12,15 +12,16 @@ import com.example.mobileapp.Actvities.model.ModelCliente;
 
 public class ClienteDetalhesActivity extends AppCompatActivity {
     //Classe java p/ exibir detalhes do cliente
-    private TextView txtCliNome, txtCliCelular, txtCliEmail, txtCliEndereco, txtCliObsercao;
+    private TextView txtCliNome, txtCliCelular, txtCliCPF, txtCliEndereco, txtCliModelo, txtCliPlaca, txtCliQuilometragem;
     private ModelCliente detalhesClientes = new ModelCliente();
     /*Componentes Inicialização*/
     public void inicializarComponentes(){
         txtCliNome = (TextView)findViewById(R.id.idNome);
         txtCliCelular = (TextView)findViewById(R.id.idCelular);
-        txtCliEmail = (TextView)findViewById(R.id.idEmail);
-        txtCliEndereco = (TextView)findViewById(R.id.idEndereco);
-        txtCliObsercao = (TextView)findViewById(R.id.idObservacao);
+        txtCliCPF = (TextView)findViewById(R.id.idCPF);
+        txtCliPlaca = (TextView)findViewById(R.id.idPlaca);
+        txtCliQuilometragem = (TextView)findViewById(R.id.idQuilometragem);
+        txtCliModelo = (TextView)findViewById(R.id.idModelo);
     }
 
     @Override
@@ -34,7 +35,7 @@ public class ClienteDetalhesActivity extends AppCompatActivity {
         if (detalhesClientes!=null) {
             txtCliNome.setText("Nome: " + detalhesClientes.getCliNome());
             txtCliCelular.setText("Celular: " + detalhesClientes.getCliCelular());
-            txtCliEndereco.setText("Endereço: " + detalhesClientes.getCliEndereco());
+            txtCliCPF.setText("Endereço: " + detalhesClientes.getCliCPF());
         }else{
             Toast.makeText(ClienteDetalhesActivity.this,
                     "Vazio",Toast.LENGTH_LONG).show();
