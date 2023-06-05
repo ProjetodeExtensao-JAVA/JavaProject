@@ -22,21 +22,19 @@ import com.example.mobileapp.Actvities.model.ModelCliente;
 public class ClientesActivity extends AppCompatActivity {
     //Classe java para entrada de dados: cadastro de cliente
     //declaração dos componentes
-    private EditText campoModelo, campoPlaca, campoCor, campoQuilometragem, campoNome, campoCPF, campoCNH, campoCelular, campoEndereco;
+    private EditText campoModelo, campoPlaca, campoKm, campoNome, campoCPF, campoCNH, campoCelular;
     private Button botaoAdicionarCliente;
     ModelCliente clienteAtual;
     //metodo para incializar componentes
     public void inicializarComponentes(){
         campoModelo = (EditText)findViewById(R.id.idModelo);
         campoPlaca = (EditText)findViewById(R.id.idPlaca);
-        campoCor = (EditText)findViewById(R.id.idCor);
-        campoQuilometragem = (EditText)findViewById(R.id.idQuilometragem);
+        campoKm = (EditText)findViewById(R.id.idKm);
 
         campoNome = (EditText)findViewById(R.id.idNome);
         campoCPF = (EditText)findViewById(R.id.idCPF);
         campoCNH = (EditText)findViewById(R.id.idCNH);
         campoCelular = (EditText)findViewById(R.id.idCelular);
-        campoEndereco = (EditText)findViewById(R.id.idEndereco);
 
         botaoAdicionarCliente = (Button)findViewById(R.id.idBtnCadastro);
     }
@@ -44,28 +42,27 @@ public class ClientesActivity extends AppCompatActivity {
     public void limparCampos(){
         campoModelo.setText("");
         campoPlaca.setText("");
-        campoCor.setText("");
-        campoQuilometragem.setText("");
+        campoKm.setText("");
 
         campoNome.setText("");
         campoCPF.setText("");
         campoCNH.setText("");
         campoCelular.setText("");
-        campoEndereco.setText("");
     }
     //metodo para cadastro de  cliente na base de dados: Tabela cliente
     public void cadastroCliente(View view){
         //declarar variaveis do tipos string para receber os atributos do cliente
-        String txtModelo, txtPlaca, txtCor, txtQuilometragem, txtNome, txtCPF, txtCNH, txtCelular, txtEndereco;
+        String txtModelo, txtPlaca, txtNome, txtCPF, txtCNH, txtCelular;
         txtModelo = campoModelo.getText().toString();
         txtPlaca = campoPlaca.getText().toString();
-        txtCor = campoCor.getText().toString();
-        txtQuilometragem = campoQuilometragem.getText().toString();
+        String txtKmString = campoKm.getText().toString();
+        int txtKm = Integer.parseInt(txtKmString);
+
+
         txtNome = campoNome.getText().toString();
         txtCPF = campoCPF.getText().toString();
         txtCNH = campoCNH.getText().toString();
         txtCelular = campoCelular.getText().toString();
-        txtEndereco = campoEndereco.getText().toString();
 
         //realizar test para verificar se os campos não estao vazio
         //se vazio retorna mensagens na tela para preencher o campo
@@ -74,8 +71,6 @@ public class ClientesActivity extends AppCompatActivity {
             if (!txtCelular.isEmpty()){
                 if (!txtPlaca.isEmpty()){
                     if (!txtModelo.isEmpty()){
-                        if(!txtQuilometragem.isEmpty()){
-                            if(!txtCor.isEmpty()){
                                 if (!txtCPF.isEmpty()){
                                     if (!txtCNH.isEmpty()){
                                         //Instancia classe Dao cliente para chamar metodo de salvar na base de dados
@@ -86,14 +81,12 @@ public class ClientesActivity extends AppCompatActivity {
                                         //passando nos parametros os valores de entreda digitado pelo usuario
                                         setCliente.setCliModelo(txtModelo);
                                         setCliente.setCliPlaca(txtPlaca);
-                                        setCliente.setCliCor(txtCor);
-                                        setCliente.setCliQuilometragem(txtQuilometragem);
+                                        setCliente.setCliKm(txtKm);
 
                                         setCliente.setCliNome(txtNome);
                                         setCliente.setCliCPF(txtCPF);
                                         setCliente.setCliCNH(txtCNH);
                                         setCliente.setCliCelular(txtCelular);
-                                        setCliente.setCliEndereco(txtEndereco);
                                         //declarar variavel para receber um valor false o true
                                         //que retorna da DaoCliente.salvar() que e boolean
                                         boolean resultado;
@@ -130,15 +123,6 @@ public class ClientesActivity extends AppCompatActivity {
                                     Toast.makeText(ClientesActivity.this,"Preencha o campo CPF!",
                                             Toast.LENGTH_LONG).show();
                                 }
-                            }else {
-                                Toast.makeText(ClientesActivity.this,"Preencha o campo Cor!",
-                                        Toast.LENGTH_LONG).show();
-                            }
-
-                        }else {
-                            Toast.makeText(ClientesActivity.this,"Preencha o campo Quilômetragem!",
-                                    Toast.LENGTH_LONG).show();
-                        }
                     }else {
                         Toast.makeText(ClientesActivity.this,"Preencha o campo Endereço!",
                                 Toast.LENGTH_LONG).show();

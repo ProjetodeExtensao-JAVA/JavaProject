@@ -9,8 +9,7 @@ public class SQLite extends SQLiteOpenHelper {
     //declaração de variaveis static
     public  static final String DATABASE = "database.db";
     //declara de variavis static tabela
-    public static final String TABELA_CLIENTE = "tb_cliente";
-    //public static final String TABELA_CARRO = "tb_carro";
+    public static final String TABELA_CLIENTE = "tb_usuario2";
     //METODO CONSTRUTOR DA CLASSE SQLITE;
     public SQLite(Context context) {
         super(context, DATABASE, null, 1);
@@ -19,30 +18,26 @@ public class SQLite extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         //criando tabela cliente
-        String sqlClinte = "create table if not exists " + TABELA_CLIENTE + "(cliCPF text primary key," +
-                "cliNome text not null," +
+        String sqlClinte = "create table if not exists " + TABELA_CLIENTE +
+                "(cliCPF text primary key," +
                 "cliCNH text not null," +
+                "cliNome text not null," +
                 "cliCelular text not null," +
-                "cliEndereco text not null)";
-
-//        String sqlCarro = "create table if not exists " + TABELA_CARRO + "(cliPlaca text primary key," +
-//                "cliModelo text not null," +
-//                "cliCor text not null," +
-//                "cliQuilometragem text not null)";
+                "cliPlaca text not null," +
+                "cliModelo text not null," +
+                "cliKm int not null)";
         try {
             //executar comando sqlite do cliente
             db.execSQL(sqlClinte);
-            //db.execSQL(sqlCarro);
         }catch (Exception erro){
             erro.printStackTrace();
             Log.i("Erro","Banco de dados: ");
         }
-
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("create table if not exists "+ TABELA_CLIENTE);
-        //db.execSQL("create table if not exists "+ TABELA_CARRO);
-        onCreate(db);
+        db.execSQL("DROP TABLE IF EXISTS " + TABELA_CLIENTE); // Drop the existing table
+        onCreate(db); // Create the table again
     }
+
 }

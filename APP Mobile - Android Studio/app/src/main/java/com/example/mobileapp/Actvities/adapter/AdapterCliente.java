@@ -50,8 +50,9 @@ public class AdapterCliente extends RecyclerView.Adapter<AdapterCliente.MyViewHo
     public  void onBindViewHolder(@NonNull final MyViewHolder myViewHolder, @SuppressLint("RecyclerView") final int i) {
         final ModelCliente cliente = listCliente.get(i);
         //retorna o nome do cliente
-        myViewHolder.nome.setText(cliente.getCliNome());
-        myViewHolder.cpf.setText(cliente.getCliCPF());
+        myViewHolder.modelo.setText(cliente.getCliModelo());
+        myViewHolder.placa.setText(cliente.getCliPlaca());
+        myViewHolder.km.setText(cliente.getClikm());
         //evento para setar detalhes clientes
         //excluir cliente
         myViewHolder.excluirCarro.setOnClickListener(new View.OnClickListener() {
@@ -77,10 +78,8 @@ public class AdapterCliente extends RecyclerView.Adapter<AdapterCliente.MyViewHo
                 builder.setNegativeButton("Cancelar!", null);
                 builder.create().show();
 
-
             }
         });
-
     }
     //metodo para verificar quantos item a na lista
     @Override
@@ -90,17 +89,19 @@ public class AdapterCliente extends RecyclerView.Adapter<AdapterCliente.MyViewHo
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         Context activity;
-        TextView cpf;
+        TextView placa;
 
-        TextView nome;
+        TextView modelo;
+        TextView km;
 
         TextView excluirCarro;
         //
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             activity = itemView.getContext();
-            cpf = itemView.findViewById(R.id.idTxtCPF);
-            nome = itemView.findViewById(R.id.idTxtNome);
+            modelo = itemView.findViewById(R.id.idTxtModelo);
+            placa = itemView.findViewById(R.id.idTxtPlaca);
+            km = itemView.findViewById(R.id.idTxtKm);
             excluirCarro = itemView.findViewById(R.id.idTxtExcluirCarro);
         }
     }

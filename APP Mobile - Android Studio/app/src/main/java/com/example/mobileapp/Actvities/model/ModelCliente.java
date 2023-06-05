@@ -7,7 +7,7 @@ public class ModelCliente implements Serializable {
     private String cliModelo;
     private String cliPlaca;
     private String cliCor;
-    private String cliQuilometragem;
+    private int  cliKm;
     private String cliNome;
     private String cliCPF;
     private String cliCNH;
@@ -27,9 +27,9 @@ public class ModelCliente implements Serializable {
 
     public void setCliCor(String cliCor) {this.cliCor = cliCor;}
 
-    public String getCliQuilometragem() {return cliQuilometragem;}
+    public int getClikm() {return cliKm;}
 
-    public void setCliQuilometragem(String cliQuilometragem) {this.cliQuilometragem = cliQuilometragem;}
+    public void setCliKm(int cliKm) {this.cliKm = cliKm;}
 
     public String getCliNome() {
         return cliNome;
@@ -68,7 +68,7 @@ public class ModelCliente implements Serializable {
                 ", cliModelo='" + cliModelo + '\'' +
                 ", cliPlaca='" + cliPlaca + '\'' +
                 ", cliCor='" + cliCor + '\'' +
-                ", cliQuilometragem='" + cliQuilometragem + '\'' +
+                ", cliKm='" + cliKm + '\'' +
                 ", cliNome='" + cliNome + '\'' +
                 ", cliCPF='" + cliCPF + '\'' +
                 ", cliCNH='" + cliCNH + '\'' +

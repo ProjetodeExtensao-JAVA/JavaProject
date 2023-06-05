@@ -35,9 +35,6 @@ public class ListarClienteActivity extends AppCompatActivity {
     public void carregarListacliente() {
         //lista clientes do banco de dados
         DaoCliente daoCliente = new DaoCliente(getBaseContext());
-        //Cliente leituraCliente = new Cliente();
-        //leituraCliente.setCliNome("Maria");
-        //listCliente.add(leituraCliente);
         listCliente = daoCliente.listarCliente();
         //exibir lista de cliente no RecyclerView
         //configurar um adapter
