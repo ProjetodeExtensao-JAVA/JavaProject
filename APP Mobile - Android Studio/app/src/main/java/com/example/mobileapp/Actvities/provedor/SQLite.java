@@ -7,7 +7,7 @@ import android.util.Log;
 
 public class SQLite extends SQLiteOpenHelper {
     //declaração de variaveis static
-    public  static final String DATABASE = "database.db";
+    public  static final String DATABASE = "usuario.db";
     //declara de variavis static tabela
     public static final String TABELA_CLIENTE = "tb_usuario2";
     //METODO CONSTRUTOR DA CLASSE SQLITE;

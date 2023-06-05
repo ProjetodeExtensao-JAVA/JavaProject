@@ -52,7 +52,8 @@ public class AdapterCliente extends RecyclerView.Adapter<AdapterCliente.MyViewHo
         //retorna o nome do cliente
         myViewHolder.modelo.setText(cliente.getCliModelo());
         myViewHolder.placa.setText(cliente.getCliPlaca());
-        myViewHolder.km.setText(cliente.getClikm());
+        myViewHolder.km.setText(String.valueOf(cliente.getClikm()));
+
         //evento para setar detalhes clientes
         //excluir cliente
         myViewHolder.excluirCarro.setOnClickListener(new View.OnClickListener() {
