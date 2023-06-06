@@ -10,11 +10,10 @@
         android:id="@+id/modeloCarro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Modelo carro"
-        app:layout_constraintBottom_toTopOf="@+id/placaCarro"
+        android:layout_marginTop="128dp"
+        android:text="Corsinha"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -22,67 +21,72 @@
         android:id="@+id/placaCarro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Placa:"
+        android:layout_marginTop="16dp"
+        android:text="zzzYYYY"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="72dp" />
-
-    <TextView
-        android:id="@+id/corCarro"
-        android:layout_width="24dp"
-        android:layout_height="22dp"
-        android:text="Cor::"
-        app:layout_constraintBottom_toTopOf="@+id/idQuilometragem"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/placaCarro" />
+        app:layout_constraintTop_toBottomOf="@+id/modeloCarro" />
 
     <EditText
         android:id="@+id/idQuilometragem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="52dp"
+        android:layout_marginTop="24dp"
         android:ems="10"
-        android:inputType="numberDecimal"
-        android:text="Quilometragem"
-        app:layout_constraintBottom_toTopOf="@+id/idObservacao"
+        android:hint="Km atual"
+        android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <EditText
         android:id="@+id/idObservacao"
         android:layout_width="280dp"
         android:layout_height="118dp"
-        android:layout_marginBottom="144dp"
+        android:layout_marginTop="28dp"
         android:ems="10"
         android:gravity="start|top"
+        android:hint="Observações"
         android:inputType="textMultiLine"
-        android:text="Observações"
-        app:layout_constraintBottom_toTopOf="@+id/idEnviar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/idQuilometragem" />
 
     <Button
         android:id="@+id/idEnviar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
+        android:layout_marginTop="28dp"
         android:text="Enviar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="165dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/idAnexos" />
 
     <ImageButton
         android:id="@+id/idAnexos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:src="@android:drawable/ic_menu_search"
-        app:layout_constraintBottom_toTopOf="@+id/idEnviar"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/idObservacao" />
 
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:text="Entre com a quilômetragem atual do carro:"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/placaCarro" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

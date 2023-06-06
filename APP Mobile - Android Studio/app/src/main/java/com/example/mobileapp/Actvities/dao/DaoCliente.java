@@ -106,4 +106,14 @@ public class DaoCliente implements MetodoCliente {
         }
         return list;
     }
+    public boolean checkLogin(String cpf, String cnh) {
+        String query = "SELECT * FROM " + SQLite.TABELA_CLIENTE + " WHERE cliCPF = ? AND cliCNH = ?";
+        Cursor cursor = sqlLeitura.rawQuery(query, new String[]{cpf, cnh});
+
+        boolean loginSuccessful = cursor.getCount() > 0;
+
+        cursor.close();
+        return loginSuccessful;
+    }
+
 }
