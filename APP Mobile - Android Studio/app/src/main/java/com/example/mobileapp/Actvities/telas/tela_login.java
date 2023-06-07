@@ -43,8 +43,9 @@ public class tela_login extends AppCompatActivity {
                 // Chamar o método checkLogin para verificar as credenciais
                 if(cpf.equals("admin") && cnh.equals("admin")){
                     startActivity(new Intent(tela_login.this, MainActivity.class));
+                    Toast.makeText(tela_login.this, "Login Successful", Toast.LENGTH_SHORT).show();
                 }
-                if (checkLogin(cpf, cnh)) {
+                else if (checkLogin(cpf, cnh)) {
                     Toast.makeText(tela_login.this, "Login Successful", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(tela_login.this, usuario_logado.class));
                 } else {

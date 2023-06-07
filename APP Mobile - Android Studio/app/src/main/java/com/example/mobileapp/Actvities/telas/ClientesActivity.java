@@ -71,58 +71,58 @@ public class ClientesActivity extends AppCompatActivity {
             if (!txtCelular.isEmpty()){
                 if (!txtPlaca.isEmpty()){
                     if (!txtModelo.isEmpty()){
-                                if (!txtCPF.isEmpty()){
-                                    if (!txtCNH.isEmpty()){
-                                        //Instancia classe Dao cliente para chamar metodo de salvar na base de dados
-                                        DaoCliente escreverCliente = new DaoCliente(getBaseContext());
-                                        //instancia classe cliente do pacote model para atribuir o valores nos
-                                        //atributos da classe
-                                        ModelCliente setCliente = new ModelCliente();
-                                        //passando nos parametros os valores de entreda digitado pelo usuario
-                                        setCliente.setCliModelo(txtModelo);
-                                        setCliente.setCliPlaca(txtPlaca);
-                                        setCliente.setCliKm(txtKm);
-
-                                        setCliente.setCliNome(txtNome);
-                                        setCliente.setCliCPF(txtCPF);
-                                        setCliente.setCliCNH(txtCNH);
-                                        setCliente.setCliCelular(txtCelular);
-                                        //declarar variavel para receber um valor false o true
-                                        //que retorna da DaoCliente.salvar() que e boolean
-                                        boolean resultado;
-                                        //chamar o metodo salvar da classe DaoCliente para setar os atributos
-                                        //passar por paramentro os atributos do tipo cliente
-                                        resultado = escreverCliente.cadastroCliente(setCliente);
-                                        //verifica qual foi o tipo de retorno true ou false
-                                        if (resultado==true){
-                                            //Avisar para usuario na tela que os dados foram gravados com sucesso
-                                            //na base de dados: tabela cliente
-                                            //Aplicar Toas personalizado
-                                            Toast toast = Toast.makeText(ClientesActivity.this,"Motorista: "+txtNome+
-                                                            "\n"+"Adicionado com sucesso",
-                                                    Toast.LENGTH_LONG);
-                                            toast.setGravity(Gravity.CENTER,0, 0);
-                                            LinearLayout toastContentView = (LinearLayout) toast.getView ();
-                                            ImageView imageView = new ImageView(getApplicationContext());
-                                            imageView.setImageResource(R.drawable.ic_positivo_24dp);
-                                            toastContentView.addView(imageView, 0);
-                                            toast.show();
-                                            //chamar metodo para limpar os campos, caso o usuario deseja cadastrar
-                                            //mais clientes
-                                            limparCampos();
-                                        }else {
-                                            //caso nao retornar true, Lançar Mensagens na tela
-                                            Toast.makeText(ClientesActivity.this,"Erro ao Adicionar cliente: "+txtNome,
-                                                    Toast.LENGTH_LONG).show();
-                                        }
-                                    }else {
-                                        Toast.makeText(ClientesActivity.this,"Preencha o campo CNH!",
-                                                Toast.LENGTH_LONG).show();
-                                    }
+                        if (!txtCPF.isEmpty()){
+                            if (!txtCNH.isEmpty()){
+                                //Instancia classe Dao cliente para chamar metodo de salvar na base de dados
+                                DaoCliente escreverCliente = new DaoCliente(getBaseContext());
+                                //instancia classe cliente do pacote model para atribuir o valores nos
+                                //atributos da classe
+                                ModelCliente setCliente = new ModelCliente();
+                                //passando nos parametros os valores de entreda digitado pelo usuario
+                                setCliente.setCliModelo(txtModelo);
+                                setCliente.setCliPlaca(txtPlaca);
+                                setCliente.setCliKm(txtKm);
+                                setCliente.setCliNome(txtNome);
+                                setCliente.setCliCPF(txtCPF);
+                                setCliente.setCliCNH(txtCNH);
+                                setCliente.setCliCelular(txtCelular);
+                                //declarar variavel para receber um valor false o true
+                                //que retorna da DaoCliente.salvar() que e boolean
+                                boolean resultado;
+                                //chamar o metodo salvar da classe DaoCliente para setar os atributos
+                                //passar por paramentro os atributos do tipo cliente
+                                resultado = escreverCliente.cadastroCliente(setCliente);
+                                System.out.println(resultado);
+                                
+                                //verifica qual foi o tipo de retorno true ou false
+                                if (resultado == true){
+                                    //Avisar para usuario na tela que os dados foram gravados com sucesso
+                                    //na base de dados: tabela cliente
+                                    //Aplicar Toas personalizado
+                                    Toast toast = Toast.makeText(ClientesActivity.this,"Motorista: "+txtNome+
+                                                    "\n"+"Adicionado com sucesso",
+                                            Toast.LENGTH_LONG);
+                                    LinearLayout toastContentView = (LinearLayout) toast.getView ();
+                                    ImageView imageView = new ImageView(getApplicationContext());
+                                    imageView.setImageResource(R.drawable.ic_positivo_24dp);
+                                    toastContentView.addView(imageView, 0);
+                                    toast.show();
+                                    //chamar metodo para limpar os campos, caso o usuario deseja cadastrar
+                                    //mais clientes
+                                    limparCampos();
                                 }else {
-                                    Toast.makeText(ClientesActivity.this,"Preencha o campo CPF!",
+                                    //caso nao retornar true, Lançar Mensagens na tela
+                                    Toast.makeText(ClientesActivity.this,"Erro ao Adicionar cliente: "+txtNome,
                                             Toast.LENGTH_LONG).show();
                                 }
+                            }else {
+                                Toast.makeText(ClientesActivity.this,"Preencha o campo CNH!",
+                                        Toast.LENGTH_LONG).show();
+                            }
+                        }else {
+                            Toast.makeText(ClientesActivity.this,"Preencha o campo CPF!",
+                                    Toast.LENGTH_LONG).show();
+                        }
                     }else {
                         Toast.makeText(ClientesActivity.this,"Preencha o campo Endereço!",
                                 Toast.LENGTH_LONG).show();
