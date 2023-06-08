@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.mobileapp.Actvities.dao.DaoCliente;
 import com.example.mobileapp.R;
 
@@ -45,7 +46,11 @@ public class tela_login extends AppCompatActivity {
                 }
                 else if (checkLogin(cpf, cnh)) {
                     Toast.makeText(tela_login.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(tela_login.this, usuario_logado.class));
+
+                    // Passar o CPF para a atividade usuario_logado
+                    Intent intent = new Intent(tela_login.this, usuario_logado.class);
+                    intent.putExtra("cpf", cpf);
+                    startActivity(intent);
                 } else {
                     Toast.makeText(tela_login.this, "Login Failed", Toast.LENGTH_SHORT).show();
                 }
