@@ -58,7 +58,6 @@ public class ClientesActivity extends AppCompatActivity {
         String txtKmString = campoKm.getText().toString();
         int txtKm = Integer.parseInt(txtKmString);
 
-
         txtNome = campoNome.getText().toString();
         txtCPF = campoCPF.getText().toString();
         txtCNH = campoCNH.getText().toString();

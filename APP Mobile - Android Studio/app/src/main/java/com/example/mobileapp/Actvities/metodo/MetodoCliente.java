@@ -10,4 +10,5 @@ public interface MetodoCliente {
     public boolean cadastroCliente(ModelCliente mCliente);
     public boolean deleteCliente(ModelCliente mCliente);
     public List<ModelCliente> listarCliente();
+    public boolean uodateKm(ModelCliente modelCliente);
 }

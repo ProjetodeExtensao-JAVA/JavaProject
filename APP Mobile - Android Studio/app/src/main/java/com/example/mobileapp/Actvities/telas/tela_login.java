@@ -13,11 +13,9 @@ import com.example.mobileapp.Actvities.dao.DaoCliente;
 import com.example.mobileapp.R;
 
 public class tela_login extends AppCompatActivity {
-
     private EditText editTextCpf;
     private EditText editTextCNH;
     private Button buttonLogin;
-
     private DaoCliente daoCliente;
 
     @Override

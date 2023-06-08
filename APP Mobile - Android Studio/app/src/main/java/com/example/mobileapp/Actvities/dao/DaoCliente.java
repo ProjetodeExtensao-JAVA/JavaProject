@@ -17,6 +17,7 @@ public class DaoCliente implements MetodoCliente {
     //declaração de variaveis para conectar ao banco de dados sqlite
     SQLiteDatabase sqlEscrever;
     SQLiteDatabase sqlLeitura;
+
     //metodo construtor da classe DaoCliente
     public DaoCliente(Context context) {
         SQLite base = new SQLite(context);
@@ -25,6 +26,7 @@ public class DaoCliente implements MetodoCliente {
         //realizar leitura na base de dados
         sqlLeitura = base.getReadableDatabase();
     }
+
     //metodo dao cadastro de cliente
     @Override
     public boolean cadastroCliente(ModelCliente mCliente) {
@@ -50,24 +52,26 @@ public class DaoCliente implements MetodoCliente {
             //sqlEscrever.insert(SQLite.TABELA_CARRO,null, carros);
             //retorna verdadeiro caso a inserir seja realizado com sucesso
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
     }
+
     //metodo dao excluir cliente
     @Override
     public boolean deleteCliente(ModelCliente mCliente) {
         try {
             String[] cpf = {mCliente.getCliCPF().toString()};
-            sqlEscrever.delete(SQLite.TABELA_CLIENTE,"cliCPF = ?", cpf);
+            sqlEscrever.delete(SQLite.TABELA_CLIENTE, "cliCPF = ?", cpf);
             //sqlEscrever.delete(SQLite.TABELA_CARRO,"cliPlaca = ?", placa);
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
     }
+
     //metodo dao lista cliente
     @Override
     public List<ModelCliente> listarCliente() {
@@ -75,13 +79,13 @@ public class DaoCliente implements MetodoCliente {
         //Vamos precisar:
         List<ModelCliente> list = new ArrayList<>();
         //vamos para o camando sqlite e atributo a uma strindo
-        String sqlSelect = "select *from "+ SQLite.TABELA_CLIENTE+";";
+        String sqlSelect = "select *from " + SQLite.TABELA_CLIENTE + ";";
         //String sqlSelect2 = "select *from "+ SQLite.TABELA_CARRO+";";
         Cursor cursor = sqlLeitura.rawQuery(sqlSelect, null);
-        while (cursor.moveToNext()){
+        while (cursor.moveToNext()) {
             ModelCliente dados = new ModelCliente();
             //declarar variaves para receber os atributos da classe cliente
-            String txtNome,txtCPF,txtCNH, txtCelular, txtModelo, txtPlaca;
+            String txtNome, txtCPF, txtCNH, txtCelular, txtModelo, txtPlaca;
             int txtKm;
 
             txtNome = cursor.getString(cursor.getColumnIndexOrThrow("cliNome"));
@@ -106,6 +110,12 @@ public class DaoCliente implements MetodoCliente {
         }
         return list;
     }
+
+    @Override
+    public boolean uodateKm(ModelCliente modelCliente) {
+        return false;
+    }
+
     public boolean checkLogin(String cpf, String cnh) {
         String query = "SELECT * FROM " + SQLite.TABELA_CLIENTE + " WHERE cliCPF = ? AND cliCNH = ?";
         Cursor cursor = sqlLeitura.rawQuery(query, new String[]{cpf, cnh});
@@ -115,5 +125,19 @@ public class DaoCliente implements MetodoCliente {
         cursor.close();
         return loginSuccessful;
     }
+    public boolean updateKm(ModelCliente mCliente) {
+        ContentValues valores = new ContentValues();
+        String[] whereArgs = { mCliente.getCliCPF() };
 
+        valores.put("cliKm", mCliente.getClikm());
+
+        try {
+            sqlEscrever.update(SQLite.TABELA_CLIENTE, valores, "cliCPF = ?", whereArgs);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
+
