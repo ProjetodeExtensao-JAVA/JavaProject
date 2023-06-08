@@ -17,27 +17,39 @@ public class usuario_logado extends AppCompatActivity {
 
     private Button botaoEnviarKm;
 
-    public void inicializarComponentes(){
-        campoKm = (EditText)findViewById(R.id.idQuilometragem);
-        botaoEnviarKm = (Button)findViewById(R.id.idEnviar);
-    }
-
-    public void updateKm(View view){
-        String txtKmString = campoKm.getText().toString();
-        int txtkm = Integer.parseInt(txtKmString);
-
-        DaoCliente escreverCliente = new DaoCliente(getBaseContext());
-
-        ModelCliente setCliente = new ModelCliente();
-
-        setCliente.setCliKm(txtkm);
-        boolean resultado;
-        resultado = escreverCliente.updateKm(setCliente);
-    }
+    private DaoCliente daoCliente;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_usuario_logado);
-        inicializarComponentes();
+
+        campoKm = (EditText)findViewById(R.id.idQuilometragem);
+        botaoEnviarKm = (Button)findViewById(R.id.idEnviar);
+        daoCliente = new DaoCliente(this);
+
+        botaoEnviarKm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String txtKmString = campoKm.getText().toString();
+                int txtkm = Integer.parseInt(txtKmString);
+
+                DaoCliente escreverCliente = new DaoCliente(getBaseContext());
+
+                ModelCliente setCliente = new ModelCliente();
+
+                setCliente.setCliKm(txtkm);
+                boolean resultado = daoCliente.updateKm(setCliente);
+
+            }
+        });
+
     }
+    private boolean updateKm(txtkm) {
+        String cpf = ""; // Insira o CPF do cliente aqui
+
+        return daoCliente.updateKm(txtkm);
+    }
+//    private boolean updateKm(int txtkm){
+//        return  daoCliente.updateKm(txtkm);
+//    }
 }

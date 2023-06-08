@@ -111,11 +111,6 @@ public class DaoCliente implements MetodoCliente {
         return list;
     }
 
-    @Override
-    public boolean uodateKm(ModelCliente modelCliente) {
-        return false;
-    }
-
     public boolean checkLogin(String cpf, String cnh) {
         String query = "SELECT * FROM " + SQLite.TABELA_CLIENTE + " WHERE cliCPF = ? AND cliCNH = ?";
         Cursor cursor = sqlLeitura.rawQuery(query, new String[]{cpf, cnh});
@@ -127,9 +122,9 @@ public class DaoCliente implements MetodoCliente {
     }
     public boolean updateKm(ModelCliente mCliente) {
         ContentValues valores = new ContentValues();
-        String[] whereArgs = { mCliente.getCliCPF() };
+        String[] whereArgs = { "'" + mCliente.getCliCPF() + "'" };
 
-        valores.put("cliKm", mCliente.getClikm());
+        valores.put("cliKm", mCliente.getcliKm());
 
         try {
             sqlEscrever.update(SQLite.TABELA_CLIENTE, valores, "cliCPF = ?", whereArgs);
@@ -139,5 +134,20 @@ public class DaoCliente implements MetodoCliente {
             return false;
         }
     }
+
+//    public boolean updateKm(ModelCliente mCliente) {
+//        ContentValues valores = new ContentValues();
+//        String[] whereArgs = { mCliente.getCliCPF() };
+//
+//        valores.put("cliKm", mCliente.getClikm());
+//
+//        try {
+//            sqlEscrever.update(SQLite.TABELA_CLIENTE, valores, "cliCPF = ?", whereArgs);
+//            return true;
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return false;
+//        }
+//    }
 }
 
