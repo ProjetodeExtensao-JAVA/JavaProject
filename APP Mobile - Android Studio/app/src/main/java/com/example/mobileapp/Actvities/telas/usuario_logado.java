@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mobileapp.Actvities.dao.DaoCliente;
@@ -31,6 +32,21 @@ public class usuario_logado extends AppCompatActivity {
         campoKm = findViewById(R.id.idQuilometragem);
         botaoEnviarKm = findViewById(R.id.idEnviar);
     }
+    private void obterModeloPlaca(String cpf) {
+        ModelCliente cliente = daoCliente.obterModeloPlaca(cpf);
+        if (cliente != null) {
+            // Exiba o modelo e a placa nos campos de texto correspondentes
+            TextView modeloCarro = findViewById(R.id.modeloCarro);
+            TextView placaCarro = findViewById(R.id.placaCarro);
+            modeloCarro.setText(cliente.getCliModelo());
+            placaCarro.setText(cliente.getCliPlaca());
+        } else {
+            // Não foi possível obter as informações do modelo e placa
+            Toast.makeText(this, "Erro ao obter informações do carro", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
 
     public void updateKm(View view) {
         String txtKmString = campoKm.getText().toString();
@@ -48,7 +64,7 @@ public class usuario_logado extends AppCompatActivity {
         if (resultado) {
             Toast.makeText(this, "Quilometragem atualizada com sucesso", Toast.LENGTH_SHORT).show();
 
-        }if (txtkm % 10000 == 0){
+        }if (txtkm % 10000 == 0 ){
             exibirNotificacao("O carro atingiu 10.000Km", "Por favor levar na revisão!!!");
         }
         else {
@@ -103,6 +119,11 @@ public class usuario_logado extends AppCompatActivity {
         inicializarComponentes();
 
         daoCliente = new DaoCliente(this);
+        String cpfUsuario = getIntent().getStringExtra("cpf");
+
+        // Chama o método para obter o modelo e a placa do usuário logado
+        obterModeloPlaca(cpfUsuario);
+
 
         botaoEnviarKm.setOnClickListener(new View.OnClickListener() {
             @Override

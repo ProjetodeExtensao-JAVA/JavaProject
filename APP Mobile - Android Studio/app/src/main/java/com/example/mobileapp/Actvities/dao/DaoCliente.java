@@ -64,7 +64,6 @@ public class DaoCliente implements MetodoCliente {
         try {
             String[] cpf = {mCliente.getCliCPF().toString()};
             sqlEscrever.delete(SQLite.TABELA_CLIENTE, "cliCPF = ?", cpf);
-            //sqlEscrever.delete(SQLite.TABELA_CARRO,"cliPlaca = ?", placa);
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -134,5 +133,22 @@ public class DaoCliente implements MetodoCliente {
             return false;
         }
     }
+    public ModelCliente obterModeloPlaca(String cpf) {
+        String query = "SELECT cliModelo, cliPlaca FROM " + SQLite.TABELA_CLIENTE + " WHERE cliCPF = ?";
+        String[] selectionArgs = { cpf };
+        Cursor cursor = sqlLeitura.rawQuery(query, selectionArgs);
+
+        ModelCliente cliente = null;
+        if (cursor.moveToFirst()) {
+            cliente = new ModelCliente();
+            cliente.setCliModelo(cursor.getString(cursor.getColumnIndexOrThrow("cliModelo")));
+            cliente.setCliPlaca(cursor.getString(cursor.getColumnIndexOrThrow("cliPlaca")));
+        }
+
+        cursor.close();
+        return cliente;
+    }
+
+
 }
 

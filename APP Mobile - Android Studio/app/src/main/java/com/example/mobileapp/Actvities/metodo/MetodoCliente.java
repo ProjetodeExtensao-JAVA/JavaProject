@@ -11,4 +11,6 @@ public interface MetodoCliente {
     public boolean deleteCliente(ModelCliente mCliente);
     public List<ModelCliente> listarCliente();
     public boolean updateKm(ModelCliente modelCliente);
+
+    public ModelCliente obterModeloPlaca(String cpf);
 }
