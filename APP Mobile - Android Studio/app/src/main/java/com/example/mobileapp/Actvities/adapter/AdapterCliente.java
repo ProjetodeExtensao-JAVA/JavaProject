@@ -6,18 +6,25 @@ import android.content.Context;
 import android.content.DialogInterface;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+import com.example.mobileapp.Manifest;
 import com.example.mobileapp.R;
 import com.example.mobileapp.Actvities.dao.DaoCliente;
 import com.example.mobileapp.Actvities.model.ModelCliente;
@@ -56,6 +63,17 @@ public class AdapterCliente extends RecyclerView.Adapter<AdapterCliente.MyViewHo
 
         //evento para setar detalhes clientes
         //excluir cliente
+        myViewHolder.mudarCor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int novaCor = Color.RED; // Defina a cor desejada aqui
+                myViewHolder.linearLayout.setBackgroundColor(novaCor);
+                // Chama o método para calcular o aviso
+                calculoAviso(cliente.getCliCPF());
+            }
+        });
+
+
         myViewHolder.excluirCarro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,19 +100,18 @@ public class AdapterCliente extends RecyclerView.Adapter<AdapterCliente.MyViewHo
             }
         });
     }
-    //metodo para verificar quantos item a na lista
     @Override
     public int getItemCount() {
-            return this.listCliente.size();
+        return this.listCliente.size();
     }
-
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         Context activity;
+        LinearLayout linearLayout;
         TextView placa;
 
         TextView modelo;
         TextView km;
-
+        TextView mudarCor;
         TextView excluirCarro;
         //
         public MyViewHolder(@NonNull View itemView) {
@@ -104,6 +121,8 @@ public class AdapterCliente extends RecyclerView.Adapter<AdapterCliente.MyViewHo
             placa = itemView.findViewById(R.id.idTxtPlaca);
             km = itemView.findViewById(R.id.idTxtKm);
             excluirCarro = itemView.findViewById(R.id.idTxtExcluirCarro);
+            mudarCor = itemView.findViewById(R.id.idTxtMudarCor);
+            linearLayout = itemView.findViewById(R.id.Layout);
         }
     }
 

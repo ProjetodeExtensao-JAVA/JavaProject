@@ -25,7 +25,8 @@ public class SQLite extends SQLiteOpenHelper {
                 "cliCelular text not null," +
                 "cliPlaca text not null," +
                 "cliModelo text not null," +
-                "cliKm int not null)";
+                "cliKm int not null," +
+                "cliKmInicial int not null)";
         try {
             //executar comando sqlite do cliente
             db.execSQL(sqlClinte);

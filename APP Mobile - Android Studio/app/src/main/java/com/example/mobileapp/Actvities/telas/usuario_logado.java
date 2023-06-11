@@ -3,13 +3,7 @@ package com.example.mobileapp.Actvities.telas;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
-import android.content.pm.PackageManager;
-import androidx.core.content.ContextCompat;
-
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.content.Context;
-import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -32,10 +26,11 @@ public class usuario_logado extends AppCompatActivity {
         campoKm = findViewById(R.id.idQuilometragem);
         botaoEnviarKm = findViewById(R.id.idEnviar);
     }
+
     private void obterModeloPlaca(String cpf) {
         ModelCliente cliente = daoCliente.obterModeloPlaca(cpf);
         if (cliente != null) {
-            // Exiba o modelo e a placa nos campos de texto correspondentes
+            // Exibe o modelo e a placa nos campos de texto correspondentes
             TextView modeloCarro = findViewById(R.id.modeloCarro);
             TextView placaCarro = findViewById(R.id.placaCarro);
             modeloCarro.setText(cliente.getCliModelo());
@@ -46,69 +41,50 @@ public class usuario_logado extends AppCompatActivity {
         }
     }
 
+    private void calculoAviso(String cpf) {
+        ModelCliente cliente = daoCliente.obterModeloPlaca(cpf);
+        if (cliente != null) {
+            int kmInicial = cliente.getClikm();
+            String txtKmString = campoKm.getText().toString();
+            int kmAtual = Integer.parseInt(txtKmString);
 
+            int diferenca = kmAtual - kmInicial;
+
+            if (diferenca >= 10000) {
+                // Enviar notificação para o Admin
+                enviarNotificacaoAdmin("Realizar revisão do carro");
+                // Alterar a cor do layout
+                alterarCorLayout();
+            }
+        } else {
+            // Não foi possível obter as informações do cliente
+            Toast.makeText(this, "Erro ao obter informações do cliente", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void alterarCorLayout() {
+        int novaCor = Color.GREEN; // Defina a cor desejada aqui
+        // Altere o código conforme necessário para alterar a cor do layout
+    }
 
     public void updateKm(View view) {
         String txtKmString = campoKm.getText().toString();
-        int txtkm = Integer.parseInt(txtKmString);
+        int txtKm = Integer.parseInt(txtKmString);
 
         // Obtenha o CPF do usuário logado
         String cpfUsuario = getIntent().getStringExtra("cpf");
 
         ModelCliente cliente = new ModelCliente();
-        cliente.setCliCPF(cpfUsuario);  // Defina o CPF do usuário logado
-        cliente.setCliKm(txtkm);  // Defina a nova quilometragem
+        cliente.setCliCPF(cpfUsuario);  // Define o CPF do usuário logado
+        cliente.setCliKm(txtKm);  // Define a nova quilometragem
 
         boolean resultado = daoCliente.updateKm(cliente);
 
         if (resultado) {
             Toast.makeText(this, "Quilometragem atualizada com sucesso", Toast.LENGTH_SHORT).show();
-
-        }if (txtkm % 10000 == 0 ){
-            exibirNotificacao("O carro atingiu 10.000Km", "Por favor levar na revisão!!!");
-        }
-        else {
+            calculoAviso(cpfUsuario); // Chama o método para calcular o aviso
+        } else {
             Toast.makeText(this, "Erro ao atualizar a quilometragem", Toast.LENGTH_SHORT).show();
-        }
-
-    }
-
-
-    private void exibirNotificacao(String titulo, String conteudo) {
-        // Cria um canal de notificação
-        criarCanalNotificacao();
-
-        // Cria a notificação
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "seu_canal_id")
-                .setSmallIcon(R.drawable.logo_hot_wheels)
-                .setContentTitle(titulo)
-                .setContentText(conteudo)
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(android.Manifest.permission.VIBRATE) != PackageManager.PERMISSION_GRANTED) {
-            // A permissão VIBRATE não foi concedida pelo usuário
-            // Você pode solicitar a permissão aqui ou tratar o caso de permissão negada de outra forma
-            return;
-        }
-        String txtKmString = campoKm.getText().toString();
-        int txtkm = Integer.parseInt(txtKmString);
-
-            // Obtém o NotificationManagerCompat
-            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
-            // Exibe a notificação
-            int notificationId = 1; // ID único para a notificação
-            notificationManager.notify(notificationId, builder.build());
-        }
-
-
-    private void criarCanalNotificacao() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            String channelId = "seu_canal_id";
-            CharSequence channelName = "Seu Canal";
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
-
-            NotificationChannel channel = new NotificationChannel(channelId, channelName, importance);
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
         }
     }
 
@@ -124,18 +100,11 @@ public class usuario_logado extends AppCompatActivity {
         // Chama o método para obter o modelo e a placa do usuário logado
         obterModeloPlaca(cpfUsuario);
 
-
         botaoEnviarKm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 updateKm(v);
             }
         });
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(android.Manifest.permission.VIBRATE) != PackageManager.PERMISSION_GRANTED) {
-            // Lidar com a situação em que a permissão não está concedida
-            // Solicitar permissão ao usuário ou realizar alguma ação alternativa
-            // ...
-            return;
-        }
     }
 }

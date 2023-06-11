@@ -13,4 +13,5 @@ public interface MetodoCliente {
     public boolean updateKm(ModelCliente modelCliente);
 
     public ModelCliente obterModeloPlaca(String cpf);
+    public ModelCliente calculoAviso(String placa);
 }

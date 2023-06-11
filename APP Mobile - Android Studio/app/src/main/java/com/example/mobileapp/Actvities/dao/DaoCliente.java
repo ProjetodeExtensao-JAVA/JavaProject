@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -148,7 +147,19 @@ public class DaoCliente implements MetodoCliente {
         cursor.close();
         return cliente;
     }
+    public ModelCliente calculoAviso(String placa){
+        String query = "SELECT cliKmInicial FROM " + SQLite.TABELA_CLIENTE + " WHERE cliPlaca = ?";
+        String[] selectionArgs = {placa};
+        Cursor cursor = sqlLeitura.rawQuery(query, selectionArgs);
 
+        ModelCliente cliente = null;
+        if (cursor.moveToFirst()) {
+            cliente = new ModelCliente();
+            cliente.setCliKm(cursor.getInt(cursor.getColumnIndexOrThrow("cliKmInicial")));
+        }
+        cursor.close();
+        return cliente;
+    }
 
 }
 
