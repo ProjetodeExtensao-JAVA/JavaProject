@@ -43,51 +43,80 @@
         android:id="@+id/idEnviar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginEnd="108dp"
         android:onClick="updateKm"
         android:text="Enviar"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnCarregarFoto" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutImagensBottom" />
 
     <Button
         android:id="@+id/btnCarregarFoto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="125dp"
         android:src="@android:drawable/ic_menu_search"
         android:text="Escolher foto"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/idEnviar"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutImagens" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutImagensBottom" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Entre com a quilômetragem atual do carro:"
+        android:text="Entre com a quilometragem atual do carro:"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/placaCarro" />
 
     <LinearLayout
-        android:id="@+id/linearLayoutImagens"
+        android:id="@+id/linearLayoutImagensTop"
         android:layout_width="409dp"
-        android:layout_height="436dp"
+        android:layout_height="218dp"
         android:layout_marginTop="1dp"
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@+id/idQuilometragem"
         tools:layout_editor_absoluteX="1dp">
 
         <ImageView
-            android:id="@+id/receberFoto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/imagemSuperior1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/imagemSuperior2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1" />
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/linearLayoutImagensBottom"
+        android:layout_width="409dp"
+        android:layout_height="218dp"
+        android:layout_marginTop="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutImagensTop"
+        tools:layout_editor_absoluteX="1dp">
+
+        <ImageView
+            android:id="@+id/imagemInferior1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/imagemInferior2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
