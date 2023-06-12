@@ -1,5 +1,7 @@
 package com.example.mobileapp.Actvities.model;
 
+import android.graphics.Bitmap;
+
 import java.io.Serializable;
 
 public class ModelCliente implements Serializable {
@@ -12,7 +14,11 @@ public class ModelCliente implements Serializable {
     private String cliCPF;
     private String cliCNH;
     private String cliCelular;
-    private String cliEndereco;
+    private Bitmap cliFotoUm;
+    private Bitmap cliFotoDois;
+    private Bitmap cliFotoTres;
+    private Bitmap cliFotoQuatro;
+
     //metodo construtor
     public ModelCliente() {
     }
@@ -54,12 +60,36 @@ public class ModelCliente implements Serializable {
         this.cliCelular = cliCelular;
     }
 
-    public String getCliEndereco() {
-        return cliEndereco;
+    public Bitmap getCliFotoUm() {
+        return cliFotoUm;
     }
 
-    public void setCliEndereco(String cliEndereco) {
-        this.cliEndereco = cliEndereco;
+    public void setCliFotoUm(Bitmap cliFotoUm) {
+        this.cliFotoUm = cliFotoUm;
+    }
+
+    public Bitmap getCliFotoDois() {
+        return cliFotoDois;
+    }
+
+    public void setCliFotoDois(Bitmap cliFotoDois) {
+        this.cliFotoDois = cliFotoDois;
+    }
+
+    public Bitmap getCliFotoTres() {
+        return cliFotoTres;
+    }
+
+    public void setCliFotoTres(Bitmap cliFotoTres) {
+        this.cliFotoTres = cliFotoTres;
+    }
+
+    public Bitmap getCliFotoQuatro() {
+        return cliFotoQuatro;
+    }
+
+    public void setCliFotoQuatro(Bitmap cliFotoQuatro) {
+        this.cliFotoQuatro = cliFotoQuatro;
     }
 
     @Override
@@ -73,7 +103,10 @@ public class ModelCliente implements Serializable {
                 ", cliCPF='" + cliCPF + '\'' +
                 ", cliCNH='" + cliCNH + '\'' +
                 ", cliCelular='" + cliCelular + '\'' +
-                ", cliEndereco='" + cliEndereco + '\'' +
+                ", cliFotoUm='" + cliFotoUm + '\'' +
+                ", cliFotoDois='" + cliFotoDois + '\'' +
+                ", cliFotoTres='" + cliFotoTres + '\'' +
+                ", cliFotoQuatro='" + cliFotoQuatro + '\'' +
                 '}';
     }
 }

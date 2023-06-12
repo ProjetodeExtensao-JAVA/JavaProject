@@ -153,4 +153,31 @@ public class DaoCliente implements MetodoCliente {
         cursor.close();
         return cliente;
     }
+    public boolean inserirFotosBanco(ModelCliente mCliente) {
+        ContentValues clientes = new ContentValues();
+
+        try {
+            byte[] fotoUm = getBytesFromBitmap(mCliente.getCliFotoUm());
+            byte[] fotoDois = getBytesFromBitmap(mCliente.getCliFotoDois());
+            byte[] fotoTres = getBytesFromBitmap(mCliente.getCliFotoTres());
+            byte[] fotoQuatro = getBytesFromBitmap(mCliente.getCliFotoQuatro());
+
+            clientes.put("cliFotoUm", fotoUm);
+            clientes.put("cliFotoDois", fotoDois);
+            clientes.put("cliFotoTres", fotoTres);
+            clientes.put("cliFotoQuatro", fotoQuatro);
+
+            sqlEscrever.insert(SQLite.TABELA_FOTOS, null, clientes);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    private byte[] getBytesFromBitmap(Bitmap bitmap) {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        return stream.toByteArray();
+    }
 }
+

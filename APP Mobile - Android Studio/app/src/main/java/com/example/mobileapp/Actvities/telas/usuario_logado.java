@@ -33,6 +33,7 @@ import com.example.mobileapp.Actvities.dao.DaoCliente;
 import com.example.mobileapp.Actvities.model.ModelCliente;
 import com.example.mobileapp.R;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,12 +47,25 @@ import java.util.List;
         private List<Uri> listaUrisSelecionadas = new ArrayList<>();
         private ActivityResultLauncher<Intent> someActivityResultLauncher;
 
+        private ImageView imagemSuperior1;
+
+        private ImageView imagemSuperior2;
+        private ImageView imagemInferior1;
+        private ImageView imagemInferior2;
+
+        private byte[] imagemSuperior1Bytes;
+        private byte[] imagemSuperior2Bytes;
+        private byte[] imagemInferior1Bytes;
+        private byte[] imagemInferior2Bytes;
+
+
+
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_usuario_logado);
             inicializarComponentes();
-
+            limparCampos();
             daoCliente = new DaoCliente(this);
             String cpfUsuario = getIntent().getStringExtra("cpf");
 
@@ -59,6 +73,7 @@ import java.util.List;
             obterModeloPlaca(cpfUsuario);
 
             botaoEnviarKm.setOnClickListener(new View.OnClickListener() {
+
                 @Override
                 public void onClick(View v) {
                     updateKm(v);
@@ -113,7 +128,23 @@ import java.util.List;
         public void inicializarComponentes() {
             campoKm = findViewById(R.id.idQuilometragem);
             botaoEnviarKm = findViewById(R.id.idEnviar);
+
+            imagemSuperior1 = findViewById(R.id.imagemSuperior1);
+            imagemSuperior2 = findViewById(R.id.imagemSuperior2);
+
+            imagemInferior1 = findViewById(R.id.imagemInferior1);
+            imagemInferior2 = findViewById(R.id.imagemInferior2);
         }
+        public void limparCampos(){
+            imagemSuperior1.setImageDrawable(null);
+            imagemSuperior2.setImageDrawable(null);
+            imagemInferior1.setImageDrawable(null);
+            imagemInferior2.setImageDrawable(null);
+
+            campoKm.setText("0");
+
+        }
+
 
         private void obterModeloPlaca(String cpf) {
             ModelCliente cliente = daoCliente.obterModeloPlaca(cpf);
@@ -128,6 +159,7 @@ import java.util.List;
                 Toast.makeText(this, "Erro ao obter informações do carro", Toast.LENGTH_SHORT).show();
             }
         }
+
 
         public void updateKm(View view) {
             String txtKmString = campoKm.getText().toString();
@@ -198,34 +230,57 @@ import java.util.List;
 
         private void exibirImagensSelecionadas() {
             if (!listaUrisSelecionadas.isEmpty()) {
-                LinearLayout linearLayoutTop = findViewById(R.id.linearLayoutImagensTop); // ID do LinearLayout para as imagens superiores
-                LinearLayout linearLayoutBottom = findViewById(R.id.linearLayoutImagensBottom); // ID do LinearLayout para as imagens inferiores
+                LinearLayout linearLayoutTop = findViewById(R.id.linearLayoutImagensTop);
+                LinearLayout linearLayoutBottom = findViewById(R.id.linearLayoutImagensBottom);
 
-                linearLayoutTop.removeAllViews(); // Remove as visualizações anteriores se houver
-                linearLayoutBottom.removeAllViews(); // Remove as visualizações anteriores se houver
+                linearLayoutTop.removeAllViews();
+                linearLayoutBottom.removeAllViews();
 
-                int maxImages = Math.min(listaUrisSelecionadas.size(), 4);  // Define o número máximo de imagens a serem exibidas como 4
+                int maxImages = Math.min(listaUrisSelecionadas.size(), 4);
 
                 for (int i = 0; i < maxImages; i++) {
                     Uri imageUri = listaUrisSelecionadas.get(i);
 
                     try {
-                        Bitmap bitmap = getResizedBitmap(MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri), 500, 500); // Redimensiona a imagem para 300x300 pixels
+                        Bitmap bitmap = getResizedBitmap(MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri), 500, 500);
                         ImageView imageView = new ImageView(this);
                         imageView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
                         imageView.setImageBitmap(bitmap);
 
+                        // Converter o Bitmap em byte[]
+                        byte[] imageBytes = getBytesFromBitmap(bitmap);
+
                         if (i < 2) {
-                            linearLayoutTop.addView(imageView); // Adiciona a ImageView ao layout das imagens superiores
+                            linearLayoutTop.addView(imageView);
+                            // Armazenar o byte[] em variáveis
+                            if (i == 0) {
+                                imagemSuperior1Bytes = imageBytes;
+                            } else if (i == 1) {
+                                imagemSuperior2Bytes = imageBytes;
+                            }
                         } else {
-                            linearLayoutBottom.addView(imageView); // Adiciona a ImageView ao layout das imagens inferiores
+                            linearLayoutBottom.addView(imageView);
+                            // Armazenar o byte[] em variáveis
+                            if (i == 2) {
+                                imagemInferior1Bytes = imageBytes;
+                            } else if (i == 3) {
+                                imagemInferior2Bytes = imageBytes;
+                            }
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                 }
             }
+            limparCampos();
         }
+
+        private byte[] getBytesFromBitmap(Bitmap bitmap) {
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            return stream.toByteArray();
+        }
+
 
 
         private Bitmap getResizedBitmap(Bitmap bitmap, int newWidth, int newHeight) {

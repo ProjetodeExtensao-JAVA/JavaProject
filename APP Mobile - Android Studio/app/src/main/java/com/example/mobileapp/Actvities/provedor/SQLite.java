@@ -6,38 +6,54 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 public class SQLite extends SQLiteOpenHelper {
-    //declaração de variaveis static
-    public  static final String DATABASE = "usuario.db";
-    //declara de variavis static tabela
+    // Declaração de variáveis estáticas
+    public static final String DATABASE = "usuario.db";
+    // Declaração de variáveis estáticas tabela
     public static final String TABELA_CLIENTE = "tb_usuario2";
-    //METODO CONSTRUTOR DA CLASSE SQLITE;
+    public static final String TABELA_FOTOS = "tb_fotos";
+
+    // Método construtor da classe SQLite
     public SQLite(Context context) {
         super(context, DATABASE, null, 1);
     }
-
     @Override
     public void onCreate(SQLiteDatabase db) {
-        //criando tabela cliente
-        String sqlClinte = "create table if not exists " + TABELA_CLIENTE +
-                "(cliCPF text primary key," +
-                "cliCNH text not null," +
-                "cliNome text not null," +
-                "cliCelular text not null," +
-                "cliPlaca text not null," +
-                "cliModelo text not null," +
-                "cliKm int not null)";
+        // Criando tabela cliente
+        String sqlCliente = "CREATE TABLE IF NOT EXISTS " + TABELA_CLIENTE +
+                "(cliCPF TEXT PRIMARY KEY," +
+                "cliCNH TEXT NOT NULL," +
+                "cliNome TEXT NOT NULL," +
+                "cliCelular TEXT NOT NULL," +
+                "cliPlaca TEXT NOT NULL," +
+                "cliModelo TEXT NOT NULL," +
+                "cliKm INT NOT NULL)";
+
+        // Criando tabela de fotos
+        String sqlFotos = "CREATE TABLE IF NOT EXISTS " + TABELA_FOTOS +
+                "(id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "cliCPF TEXT," +
+                "cliFotoUm byte," +
+                "cliFotoDois byte," +
+                "cliFotoTres byte," +
+                "cliFotoQuatro byte," +
+                "FOREIGN KEY(cliCPF) REFERENCES " + TABELA_CLIENTE + "(cliCPF))";
+
         try {
-            //executar comando sqlite do cliente
-            db.execSQL(sqlClinte);
-        }catch (Exception erro){
+            // Executar comando SQL da tabela cliente
+            db.execSQL(sqlCliente);
+
+            // Executar comando SQL da tabela de fotos
+            db.execSQL(sqlFotos);
+        } catch (Exception erro) {
             erro.printStackTrace();
-            Log.i("Erro","Banco de dados: ");
+            Log.i("Erro", "Banco de dados: ");
         }
     }
+
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS " + TABELA_FOTOS); // Drop the existing table
         db.execSQL("DROP TABLE IF EXISTS " + TABELA_CLIENTE); // Drop the existing table
-        onCreate(db); // Create the table again
+        onCreate(db); // Create the tables again
     }
-
 }
