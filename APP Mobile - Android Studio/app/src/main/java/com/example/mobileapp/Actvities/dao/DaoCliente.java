@@ -4,8 +4,11 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,27 +17,36 @@ import com.example.mobileapp.Actvities.model.ModelCliente;
 import com.example.mobileapp.Actvities.provedor.SQLite;
 
 public class DaoCliente implements MetodoCliente {
-    //declaração de variaveis para conectar ao banco de dados sqlite
     SQLiteDatabase sqlEscrever;
     SQLiteDatabase sqlLeitura;
 
-    //metodo construtor da classe DaoCliente
     public DaoCliente(Context context) {
         SQLite base = new SQLite(context);
-        //inserir dados da tabela
         sqlEscrever = base.getWritableDatabase();
-        //realizar leitura na base de dados
         sqlLeitura = base.getReadableDatabase();
     }
+//    métodos para converter uma imagem Bitmap em uma string Base64 (bitmapToBase64) e para converter uma string Base64 de volta em um objeto Bitmap (base64ToBitmap).
+//    No entanto, não há chamadas explícitas a esses métodos nas funções cadastroCliente e updateFotoCliente fornecidas.
+//
+//    Para enviar as fotos para o banco de dados, você precisa chamar o método bitmapToBase64 para converter a imagem em uma string Base64 e,
+//    em seguida, salvar essa string no banco de dados.
+//
+//    Aqui está um exemplo de como você pode modificar a função cadastroCliente para salvar a foto do cliente no banco de dados:
+    private String bitmapToBase64(Bitmap imageBitmap) {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+        byte[] byteArray = byteArrayOutputStream.toByteArray();
+        return Base64.encodeToString(byteArray, Base64.DEFAULT);
+    }
 
-    //metodo dao cadastro de cliente
+    private Bitmap base64ToBitmap(String base64String) {
+        byte[] decodedBytes = Base64.decode(base64String, Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
+    }
+
     @Override
     public boolean cadastroCliente(ModelCliente mCliente) {
-        //Classe Instancia para inserir dados na base de dados
         ContentValues clientes = new ContentValues();
-        //passar String key para inserir nos campos na tabela clientes
-        //key declarada ao cria a tabela cliente: campos da tabela clientes
-
 
         clientes.put("cliCPF", mCliente.getCliCPF());
         clientes.put("cliCNH", mCliente.getCliCNH());
@@ -44,13 +56,8 @@ public class DaoCliente implements MetodoCliente {
         clientes.put("cliModelo", mCliente.getCliModelo());
         clientes.put("cliKm", mCliente.getClikm());
 
-        //lanchar um try caso return o false lance uma excption para tratar o erro
         try {
-            //gravar na tabela clientes
-            //passando no paramentro o nome da tabela e os valores
             sqlEscrever.insert(SQLite.TABELA_CLIENTE, null, clientes);
-            //sqlEscrever.insert(SQLite.TABELA_CARRO,null, carros);
-            //retorna verdadeiro caso a inserir seja realizado com sucesso
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -58,7 +65,6 @@ public class DaoCliente implements MetodoCliente {
         }
     }
 
-    //metodo dao excluir cliente
     @Override
     public boolean deleteCliente(ModelCliente mCliente) {
         try {
@@ -71,19 +77,14 @@ public class DaoCliente implements MetodoCliente {
         }
     }
 
-    //metodo dao lista cliente
     @Override
     public List<ModelCliente> listarCliente() {
-        //declarar variaveis para realizar a operação de listar
-        //Vamos precisar:
         List<ModelCliente> list = new ArrayList<>();
-        //vamos para o camando sqlite e atributo a uma strindo
-        String sqlSelect = "select *from " + SQLite.TABELA_CLIENTE + ";";
-        //String sqlSelect2 = "select *from "+ SQLite.TABELA_CARRO+";";
+        String sqlSelect = "SELECT * FROM " + SQLite.TABELA_CLIENTE + ";";
         Cursor cursor = sqlLeitura.rawQuery(sqlSelect, null);
+
         while (cursor.moveToNext()) {
             ModelCliente dados = new ModelCliente();
-            //declarar variaves para receber os atributos da classe cliente
             String txtNome, txtCPF, txtCNH, txtCelular, txtModelo, txtPlaca;
             int txtKm;
 
@@ -107,6 +108,8 @@ public class DaoCliente implements MetodoCliente {
 
             list.add(dados);
         }
+
+        cursor.close();
         return list;
     }
 
@@ -119,6 +122,7 @@ public class DaoCliente implements MetodoCliente {
         cursor.close();
         return loginSuccessful;
     }
+
     public boolean updateKm(ModelCliente mCliente) {
         ContentValues valores = new ContentValues();
         String[] whereArgs = {mCliente.getCliCPF()};
@@ -133,9 +137,10 @@ public class DaoCliente implements MetodoCliente {
             return false;
         }
     }
+
     public ModelCliente obterModeloPlaca(String cpf) {
         String query = "SELECT cliModelo, cliPlaca FROM " + SQLite.TABELA_CLIENTE + " WHERE cliCPF = ?";
-        String[] selectionArgs = { cpf };
+        String[] selectionArgs = {cpf};
         Cursor cursor = sqlLeitura.rawQuery(query, selectionArgs);
 
         ModelCliente cliente = null;
@@ -148,7 +153,4 @@ public class DaoCliente implements MetodoCliente {
         cursor.close();
         return cliente;
     }
-
-
 }
-
