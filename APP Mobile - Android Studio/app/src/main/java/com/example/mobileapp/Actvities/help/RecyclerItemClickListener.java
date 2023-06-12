@@ -1,17 +1,20 @@
 package com.example.mobileapp.Actvities.help;
 
 import android.content.Context;
-
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.List;
 
 public class RecyclerItemClickListener implements RecyclerView.OnItemTouchListener {
     private OnItemClickListener mListener;
     GestureDetector mGestureDetector;
+    private List<ImageView> listaImageViews; // Lista de ImageView
 
     @Override
     public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
@@ -34,27 +37,9 @@ public class RecyclerItemClickListener implements RecyclerView.OnItemTouchListen
     }
 
     public interface OnItemClickListener extends AdapterView.OnItemClickListener {
-        public void onItemClick(View view, int position);
+        void onItemClick(View view, int position); // Modificado para incluir a lista de ImageView
 
-        public void onLongItemClick(View view, int position);
+        void onLongItemClick(View view, int position);
     }
 
-    public RecyclerItemClickListener(Context context, final RecyclerView recyclerView, OnItemClickListener listener) {
-        mListener = listener;
-        mGestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
-            @Override
-            public boolean onSingleTapUp(MotionEvent e) {
-                return true;
-            }
-
-            @Override
-            public void onLongPress(MotionEvent e) {
-                View child = recyclerView.findChildViewUnder(e.getX(), e.getY());
-                if (child != null && mListener != null) {
-                    mListener.onLongItemClick(child, recyclerView.getChildAdapterPosition(child));
-                }
-            }
-        });
-
-    }
 }
