@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.app.Activity;
@@ -21,6 +22,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.view.Display;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -39,7 +41,6 @@ import java.util.ArrayList;
 import java.util.List;
 
     public class usuario_logado extends AppCompatActivity {
-
         private EditText campoKm;
         private Button botaoEnviarKm;
         private Button btnCarregarFoto;
@@ -48,7 +49,6 @@ import java.util.List;
         private ActivityResultLauncher<Intent> someActivityResultLauncher;
 
         private ImageView imagemSuperior1;
-
         private ImageView imagemSuperior2;
         private ImageView imagemInferior1;
         private ImageView imagemInferior2;
@@ -58,7 +58,7 @@ import java.util.List;
         private byte[] imagemInferior1Bytes;
         private byte[] imagemInferior2Bytes;
 
-
+        private static final int PERMISSION_REQUEST_CODE = 1001;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +66,7 @@ import java.util.List;
             setContentView(R.layout.activity_usuario_logado);
             inicializarComponentes();
             limparCampos();
+
             daoCliente = new DaoCliente(this);
             String cpfUsuario = getIntent().getStringExtra("cpf");
 
@@ -73,14 +74,15 @@ import java.util.List;
             obterModeloPlaca(cpfUsuario);
 
             botaoEnviarKm.setOnClickListener(new View.OnClickListener() {
-
                 @Override
                 public void onClick(View v) {
+
                     updateKm(v);
+                    inserirFotosBanco(cpfUsuario);
                 }
             });
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.VIBRATE) != PackageManager.PERMISSION_GRANTED) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && ContextCompat.checkSelfPermission(this, Manifest.permission.VIBRATE) != PackageManager.PERMISSION_GRANTED) {
                 // Lidar com a situação em que a permissão não está concedida
                 // Solicitar permissão ao usuário ou realizar alguma ação alternativa
                 // ...
@@ -92,9 +94,9 @@ import java.util.List;
             btnCarregarFoto.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                    if (ContextCompat.checkSelfPermission(usuario_logado.this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                         String[] permissao = {Manifest.permission.READ_EXTERNAL_STORAGE};
-                        requestPermissions(permissao, 1001);
+                        requestPermissions(permissao, PERMISSION_REQUEST_CODE);
                     } else {
                         escolherImagens();
                     }
@@ -131,18 +133,39 @@ import java.util.List;
 
             imagemSuperior1 = findViewById(R.id.imagemSuperior1);
             imagemSuperior2 = findViewById(R.id.imagemSuperior2);
-
             imagemInferior1 = findViewById(R.id.imagemInferior1);
             imagemInferior2 = findViewById(R.id.imagemInferior2);
         }
-        public void limparCampos(){
+
+        public void limparCampos() {
             imagemSuperior1.setImageDrawable(null);
             imagemSuperior2.setImageDrawable(null);
             imagemInferior1.setImageDrawable(null);
             imagemInferior2.setImageDrawable(null);
-
             campoKm.setText("0");
+        }
 
+        private void inserirFotosBanco(String cpfCliente) {
+            if (imagemSuperior1Bytes != null && imagemSuperior2Bytes != null &&
+                    imagemInferior1Bytes != null && imagemInferior2Bytes != null) {
+
+                byte[] foto1 = imagemSuperior1Bytes;
+                byte[] foto2 = imagemSuperior2Bytes;
+                byte[] foto3 = imagemInferior1Bytes;
+                byte[] foto4 = imagemInferior2Bytes;
+
+                daoCliente.inserirFotosBanco(cpfCliente, foto1, foto2, foto3, foto4);
+
+                Toast.makeText(this, "Fotos inseridas no banco de dados", Toast.LENGTH_SHORT).show();
+
+                // Limpar as variáveis de armazenamento das imagens
+                imagemSuperior1Bytes = null;
+                imagemSuperior2Bytes = null;
+                imagemInferior1Bytes = null;
+                imagemInferior2Bytes = null;
+            } else {
+                Toast.makeText(this, "Selecione as 4 fotos antes de inserir no banco de dados", Toast.LENGTH_SHORT).show();
+            }
         }
 
 
@@ -160,17 +183,16 @@ import java.util.List;
             }
         }
 
-
         public void updateKm(View view) {
             String txtKmString = campoKm.getText().toString();
-            int txtkm = Integer.parseInt(txtKmString);
+            int txtKm = Integer.parseInt(txtKmString);
 
             // Obtenha o CPF do usuário logado
             String cpfUsuario = getIntent().getStringExtra("cpf");
 
             ModelCliente cliente = new ModelCliente();
             cliente.setCliCPF(cpfUsuario);  // Defina o CPF do usuário logado
-            cliente.setCliKm(txtkm);  // Defina a nova quilometragem
+            cliente.setCliKm(txtKm);  // Defina a nova quilometragem
 
             boolean resultado = daoCliente.updateKm(cliente);
 
@@ -180,7 +202,7 @@ import java.util.List;
                 Toast.makeText(this, "Erro ao atualizar a quilometragem", Toast.LENGTH_SHORT).show();
             }
 
-            if (txtkm % 10000 == 0) {
+            if (txtKm % 10000 == 0) {
                 exibirNotificacao("O carro atingiu 10.000Km", "Por favor levar na revisão!!!");
             }
         }
@@ -196,7 +218,7 @@ import java.util.List;
                     .setContentText(conteudo)
                     .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(android.Manifest.permission.VIBRATE) != PackageManager.PERMISSION_GRANTED) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.VIBRATE) != PackageManager.PERMISSION_GRANTED) {
                 // A permissão VIBRATE não foi concedida pelo usuário
                 // Você pode solicitar a permissão aqui ou tratar o caso de permissão negada de outra forma
                 return;
@@ -281,8 +303,6 @@ import java.util.List;
             return stream.toByteArray();
         }
 
-
-
         private Bitmap getResizedBitmap(Bitmap bitmap, int newWidth, int newHeight) {
             int width = bitmap.getWidth();
             int height = bitmap.getHeight();
@@ -292,20 +312,20 @@ import java.util.List;
             Matrix matrix = new Matrix();
             // Define o fator de escala para a matriz
             matrix.postScale(scaleWidth, scaleHeight);
-            // Redimensiona a imagem com a matriz fornecida
+            // Cria uma nova imagem redimensionada
             return Bitmap.createBitmap(bitmap, 0, 0, width, height, matrix, false);
         }
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode) {
-            case 1001:
+
+        @Override
+        public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+            if (requestCode == PERMISSION_REQUEST_CODE) {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     escolherImagens();
                 } else {
-                    Toast.makeText(this, "Permissão negada!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Permissão negada para acessar as imagens", Toast.LENGTH_SHORT).show();
                 }
-                break;
+            }
         }
-    }
+
 }

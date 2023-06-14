@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.USE_NOTIFICATION_DURING_SETUP" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_home"
@@ -13,26 +15,33 @@
         android:theme="@style/AppTheme"
         tools:targetApi="31">
         <activity
+            android:name=".Actvities.adapter.FotoAdapter"
+            android:exported="false" />
+        <activity
+            android:name=".Actvities.telas.TelaFotoActivity"
+            android:exported="true" />
+        <activity
             android:name=".Actvities.telas.ClientesActivity"
             android:exported="true"
-            android:parentActivityName=".Actvities.telas.MainActivity"/>
+            android:parentActivityName=".Actvities.telas.MainActivity" />
         <activity
             android:name=".Actvities.telas.usuario_logado"
             android:exported="true"
-            android:parentActivityName=".Actvities.telas.tela_login"/>
+            android:parentActivityName=".Actvities.telas.tela_login" />
         <activity
             android:name=".Actvities.telas.MainActivity"
             android:exported="true"
-            android:parentActivityName=".Actvities.telas.tela_login"/>
+            android:parentActivityName=".Actvities.telas.tela_login" />
         <activity
             android:name=".Actvities.telas.ListarClienteActivity"
             android:exported="true"
-            android:parentActivityName=".Actvities.telas.MainActivity"/>
+            android:parentActivityName=".Actvities.telas.MainActivity" />
         <activity
             android:name=".Actvities.telas.tela_login"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

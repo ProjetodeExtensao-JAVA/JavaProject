@@ -153,19 +153,14 @@ public class DaoCliente implements MetodoCliente {
         cursor.close();
         return cliente;
     }
-    public boolean inserirFotosBanco(ModelCliente mCliente) {
+    public boolean inserirFotosBanco(String cpfCliente, byte[] foto1, byte[] foto2, byte[] foto3, byte[] foto4) {
         ContentValues clientes = new ContentValues();
 
         try {
-            byte[] fotoUm = getBytesFromBitmap(mCliente.getCliFotoUm());
-            byte[] fotoDois = getBytesFromBitmap(mCliente.getCliFotoDois());
-            byte[] fotoTres = getBytesFromBitmap(mCliente.getCliFotoTres());
-            byte[] fotoQuatro = getBytesFromBitmap(mCliente.getCliFotoQuatro());
-
-            clientes.put("cliFotoUm", fotoUm);
-            clientes.put("cliFotoDois", fotoDois);
-            clientes.put("cliFotoTres", fotoTres);
-            clientes.put("cliFotoQuatro", fotoQuatro);
+            clientes.put("cliFotoUm", foto1);
+            clientes.put("cliFotoDois", foto2);
+            clientes.put("cliFotoTres", foto3);
+            clientes.put("cliFotoQuatro", foto4);
 
             sqlEscrever.insert(SQLite.TABELA_FOTOS, null, clientes);
             return true;
@@ -174,10 +169,37 @@ public class DaoCliente implements MetodoCliente {
             return false;
         }
     }
+
     private byte[] getBytesFromBitmap(Bitmap bitmap) {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
         return stream.toByteArray();
     }
+
+    public ModelCliente buscarFotosCliente(String cpf) {
+        String query = "SELECT cliFotoUm, cliFotoDois, cliFotoTres, cliFotoQuatro FROM " + SQLite.TABELA_FOTOS + " WHERE cliCPF = ?";
+        String[] selectionArgs = { cpf };
+        Cursor cursor = sqlLeitura.rawQuery(query, selectionArgs);
+
+        ModelCliente cliente = null;
+        if (cursor.moveToFirst()) {
+            cliente = new ModelCliente();
+
+            byte[] fotoUmBytes = cursor.getBlob(cursor.getColumnIndexOrThrow("cliFotoUm"));
+            byte[] fotoDoisBytes = cursor.getBlob(cursor.getColumnIndexOrThrow("cliFotoDois"));
+            byte[] fotoTresBytes = cursor.getBlob(cursor.getColumnIndexOrThrow("cliFotoTres"));
+            byte[] fotoQuatroBytes = cursor.getBlob(cursor.getColumnIndexOrThrow("cliFotoQuatro"));
+
+            cliente.setCliFotoUm(fotoUmBytes);
+            cliente.setCliFotoDois(fotoDoisBytes);
+            cliente.setCliFotoTres(fotoTresBytes);
+            cliente.setCliFotoQuatro(fotoQuatroBytes);
+        }
+
+        cursor.close();
+        return cliente;
+    }
+
+
 }
 

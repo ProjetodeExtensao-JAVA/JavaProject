@@ -14,10 +14,10 @@ public class ModelCliente implements Serializable {
     private String cliCPF;
     private String cliCNH;
     private String cliCelular;
-    private Bitmap cliFotoUm;
-    private Bitmap cliFotoDois;
-    private Bitmap cliFotoTres;
-    private Bitmap cliFotoQuatro;
+    private byte[] cliFotoUm;
+    private byte[] cliFotoDois;
+    private byte[] cliFotoTres;
+    private byte[] cliFotoQuatro;
 
     //metodo construtor
     public ModelCliente() {
@@ -60,35 +60,35 @@ public class ModelCliente implements Serializable {
         this.cliCelular = cliCelular;
     }
 
-    public Bitmap getCliFotoUm() {
+    public byte[] getCliFotoUm() {
         return cliFotoUm;
     }
 
-    public void setCliFotoUm(Bitmap cliFotoUm) {
+    public void setCliFotoUm(byte[] cliFotoUm) {
         this.cliFotoUm = cliFotoUm;
     }
 
-    public Bitmap getCliFotoDois() {
+    public byte[] getCliFotoDois() {
         return cliFotoDois;
     }
 
-    public void setCliFotoDois(Bitmap cliFotoDois) {
+    public void setCliFotoDois(byte[] cliFotoDois) {
         this.cliFotoDois = cliFotoDois;
     }
 
-    public Bitmap getCliFotoTres() {
+    public byte[] getCliFotoTres() {
         return cliFotoTres;
     }
 
-    public void setCliFotoTres(Bitmap cliFotoTres) {
+    public void setCliFotoTres(byte[] cliFotoTres) {
         this.cliFotoTres = cliFotoTres;
     }
 
-    public Bitmap getCliFotoQuatro() {
+    public byte[] getCliFotoQuatro() {
         return cliFotoQuatro;
     }
 
-    public void setCliFotoQuatro(Bitmap cliFotoQuatro) {
+    public void setCliFotoQuatro(byte[] cliFotoQuatro) {
         this.cliFotoQuatro = cliFotoQuatro;
     }
 
