@@ -156,7 +156,7 @@ public class DaoCliente implements MetodoCliente {
     }
     public boolean inserirFotosBanco(ModelCliente mCliente) {
         ContentValues clientes = new ContentValues();
-        String[] whereArgs = {mCliente.getCliCPF()};
+
         try {
             clientes.put("cliCPF", mCliente.getCliCPF());
             clientes.put("cliFotoUm", mCliente.getCliFotoUm());
@@ -171,6 +171,7 @@ public class DaoCliente implements MetodoCliente {
             return false;
         }
     }
+
 
     private byte[] getBytesFromBitmap(Bitmap bitmap) {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();

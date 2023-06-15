@@ -34,8 +34,6 @@ public class TelaFotoActivity extends AppCompatActivity {
 
         exibirFotos(mCliente);
     }
-
-
     public void inicializarComponentes() {
         recyclerViewFotos = findViewById(R.id.recyclerViewFotos);
     }
@@ -68,7 +66,4 @@ public class TelaFotoActivity extends AppCompatActivity {
             Snackbar.make(recyclerViewFotos, "CPF não fornecido", Snackbar.LENGTH_LONG).show();
         }
     }
-
-
-
 }

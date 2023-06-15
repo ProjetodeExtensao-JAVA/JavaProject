@@ -149,12 +149,11 @@ import java.util.List;
         private void inserirFotosBanco(ModelCliente cliente) {
             if (imagemSuperior1Bytes != null && imagemSuperior2Bytes != null &&
                     imagemInferior1Bytes != null && imagemInferior2Bytes != null) {
-                String cpf = getIntent().getStringExtra("cpf");
                 byte[] foto1 = imagemSuperior1Bytes;
                 byte[] foto2 = imagemSuperior2Bytes;
                 byte[] foto3 = imagemInferior1Bytes;
                 byte[] foto4 = imagemInferior2Bytes;
-                cliente.setCliCPF(cpf);
+
                 cliente.setCliFotoUm(foto1);
                 cliente.setCliFotoDois(foto2);
                 cliente.setCliFotoTres(foto3);
@@ -162,7 +161,11 @@ import java.util.List;
 
                 boolean resultado = daoCliente.inserirFotosBanco(cliente);
 
-                Toast.makeText(this, "Fotos inseridas no banco de dados", Toast.LENGTH_SHORT).show();
+                if (resultado) {
+                    Toast.makeText(this, "Fotos inseridas no banco de dados", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this, "Erro ao inserir as fotos no banco de dados", Toast.LENGTH_SHORT).show();
+                }
 
                 // Limpar as variáveis de armazenamento das imagens
                 imagemSuperior1Bytes = null;
@@ -173,6 +176,7 @@ import java.util.List;
                 Toast.makeText(this, "Selecione as 4 fotos antes de inserir no banco de dados", Toast.LENGTH_SHORT).show();
             }
         }
+
 
 
 
