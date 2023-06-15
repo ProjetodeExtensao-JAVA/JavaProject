@@ -5,6 +5,7 @@ package com.example.mobileapp.Actvities.telas;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
@@ -17,6 +18,7 @@ import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.ColorSpace;
 import android.graphics.Matrix;
 import android.net.Uri;
@@ -38,6 +40,7 @@ import com.example.mobileapp.R;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,46 +64,26 @@ import java.util.List;
         private ModelCliente cliente;
         private static final int PERMISSION_REQUEST_CODE = 1001;
 
+
+        private ImageView imageView;
+
+        private static final int REQUEST_CODE_SELECT_IMAGE = 100;
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_usuario_logado);
-            inicializarComponentes();
-            limparCampos();
 
-            daoCliente = new DaoCliente(this);
-            String cpfUsuario = getIntent().getStringExtra("cpf");
-
-            // Chama o método para obter o modelo e a placa do usuário logado
-            obterModeloPlaca(cpfUsuario);
-
-            botaoEnviarKm.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    updateKm(v);
-                    inserirFotosBanco(cliente);
-                }
-            });
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && ContextCompat.checkSelfPermission(this, Manifest.permission.VIBRATE) != PackageManager.PERMISSION_GRANTED) {
-                // Lidar com a situação em que a permissão não está concedida
-                // Solicitar permissão ao usuário ou realizar alguma ação alternativa
-                // ...
-                return;
-            }
-
+            imageView = findViewById(R.id.imageView);
             btnCarregarFoto = findViewById(R.id.btnCarregarFoto);
 
             btnCarregarFoto.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (ContextCompat.checkSelfPermission(usuario_logado.this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-                        String[] permissao = {Manifest.permission.READ_EXTERNAL_STORAGE};
-                        requestPermissions(permissao, PERMISSION_REQUEST_CODE);
-                    } else {
-                        escolherImagens();
-                    }
+                    Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+                    intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+                    intent.addCategory(Intent.CATEGORY_OPENABLE);
+                    intent.setType("image/*");
+                    startActivityForResult(intent, REQUEST_CODE_SELECT_IMAGE);
                 }
             });
 
@@ -127,6 +110,30 @@ import java.util.List;
                     }
             );
         }
+
+        @Override
+        protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+            super.onActivityResult(requestCode, resultCode, data);
+
+            if (requestCode == REQUEST_CODE_SELECT_IMAGE && resultCode == Activity.RESULT_OK) {
+                if (data != null) {
+                    if (data.getClipData() != null) {
+                        int count = Math.min(data.getClipData().getItemCount(), 4); // Limite para 4 fotos
+                        for (int i = 0; i < count; i++) {
+                            Uri imageUri = data.getClipData().getItemAt(i).getUri();
+                            listaUrisSelecionadas.add(imageUri);
+                        }
+                        exibirImagensSelecionadas();
+                    } else if (data.getData() != null) {
+                        Uri imageUri = data.getData();
+                        listaUrisSelecionadas.add(imageUri);
+                        exibirImagensSelecionadas();
+                    }
+                }
+            }
+        }
+
+
 
         public void inicializarComponentes() {
             campoKm = findViewById(R.id.idQuilometragem);
