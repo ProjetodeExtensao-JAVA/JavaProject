@@ -17,6 +17,7 @@ import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.ColorSpace;
 import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Build;
@@ -57,7 +58,7 @@ import java.util.List;
         private byte[] imagemSuperior2Bytes;
         private byte[] imagemInferior1Bytes;
         private byte[] imagemInferior2Bytes;
-
+        private ModelCliente cliente;
         private static final int PERMISSION_REQUEST_CODE = 1001;
 
         @Override
@@ -78,7 +79,7 @@ import java.util.List;
                 public void onClick(View v) {
 
                     updateKm(v);
-                    inserirFotosBanco(cpfUsuario);
+                    inserirFotosBanco(cliente);
                 }
             });
 
@@ -145,16 +146,21 @@ import java.util.List;
             campoKm.setText("0");
         }
 
-        private void inserirFotosBanco(String cpfCliente) {
+        private void inserirFotosBanco(ModelCliente cliente) {
             if (imagemSuperior1Bytes != null && imagemSuperior2Bytes != null &&
                     imagemInferior1Bytes != null && imagemInferior2Bytes != null) {
-
+                String cpf = getIntent().getStringExtra("cpf");
                 byte[] foto1 = imagemSuperior1Bytes;
                 byte[] foto2 = imagemSuperior2Bytes;
                 byte[] foto3 = imagemInferior1Bytes;
                 byte[] foto4 = imagemInferior2Bytes;
+                cliente.setCliCPF(cpf);
+                cliente.setCliFotoUm(foto1);
+                cliente.setCliFotoDois(foto2);
+                cliente.setCliFotoTres(foto3);
+                cliente.setCliFotoQuatro(foto4);
 
-                daoCliente.inserirFotosBanco(cpfCliente, foto1, foto2, foto3, foto4);
+                boolean resultado = daoCliente.inserirFotosBanco(cliente);
 
                 Toast.makeText(this, "Fotos inseridas no banco de dados", Toast.LENGTH_SHORT).show();
 
@@ -167,6 +173,7 @@ import java.util.List;
                 Toast.makeText(this, "Selecione as 4 fotos antes de inserir no banco de dados", Toast.LENGTH_SHORT).show();
             }
         }
+
 
 
         private void obterModeloPlaca(String cpf) {

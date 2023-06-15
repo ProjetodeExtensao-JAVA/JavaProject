@@ -8,7 +8,6 @@ public class ModelCliente implements Serializable {
     //declaração de atributos da class cliente
     private String cliModelo;
     private String cliPlaca;
-    private String cliCor;
     private int  cliKm;
     private String cliNome;
     private String cliCPF;
@@ -28,10 +27,6 @@ public class ModelCliente implements Serializable {
 
     public String getCliPlaca() {return cliPlaca;}
     public void setCliPlaca(String cliPlaca) {this.cliPlaca = cliPlaca;}
-
-    public String getCliCor() {return cliCor;}
-
-    public void setCliCor(String cliCor) {this.cliCor = cliCor;}
 
     public int getClikm() {return cliKm;}
 
@@ -97,7 +92,6 @@ public class ModelCliente implements Serializable {
         return "ModelCliente{" +
                 ", cliModelo='" + cliModelo + '\'' +
                 ", cliPlaca='" + cliPlaca + '\'' +
-                ", cliCor='" + cliCor + '\'' +
                 ", cliKm='" + cliKm + '\'' +
                 ", cliNome='" + cliNome + '\'' +
                 ", cliCPF='" + cliCPF + '\'' +

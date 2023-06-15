@@ -22,14 +22,9 @@ public class FotoAdapter extends RecyclerView.Adapter<FotoAdapter.ViewHolder> {
     private Context context;
     private List<ModelCliente> clientes;
 
-    public FotoAdapter(Context context) {
-        this.context = context;
-        clientes = new ArrayList<>();
-    }
-
-    public void setClientes(List<ModelCliente> clientes) {
+    public FotoAdapter(List<ModelCliente> clientes, Context context) {
         this.clientes = clientes;
-        notifyDataSetChanged();
+        this.context = context;
     }
 
     @NonNull
@@ -56,6 +51,7 @@ public class FotoAdapter extends RecyclerView.Adapter<FotoAdapter.ViewHolder> {
         Bitmap fotoQuatroBitmap = BitmapFactory.decodeByteArray(fotoQuatro, 0, fotoQuatro.length);
 
         // Exibir as fotos nos ImageViews correspondentes
+        holder.cpf.setText(cliente.getCliCPF());
         holder.imageViewFotoUm.setImageBitmap(fotoUmBitmap);
         holder.imageViewFotoDois.setImageBitmap(fotoDoisBitmap);
         holder.imageViewFotoTres.setImageBitmap(fotoTresBitmap);
@@ -72,11 +68,11 @@ public class FotoAdapter extends RecyclerView.Adapter<FotoAdapter.ViewHolder> {
         ImageView imageViewFotoDois;
         ImageView imageViewFotoTres;
         ImageView imageViewFotoQuatro;
-        TextView placa;
+        TextView cpf;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            placa = itemView.findViewById(R.id.textViewPlaca);
+            cpf = itemView.findViewById(R.id.textViewPlaca);
             imageViewFotoUm = itemView.findViewById(R.id.imageViewFotoUm);
             imageViewFotoDois = itemView.findViewById(R.id.imageViewFotoDois);
             imageViewFotoTres = itemView.findViewById(R.id.imageViewFotoTres);

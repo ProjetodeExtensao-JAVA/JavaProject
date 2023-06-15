@@ -15,6 +15,7 @@ import java.util.List;
 import com.example.mobileapp.Actvities.metodo.MetodoCliente;
 import com.example.mobileapp.Actvities.model.ModelCliente;
 import com.example.mobileapp.Actvities.provedor.SQLite;
+import com.google.android.material.snackbar.Snackbar;
 
 public class DaoCliente implements MetodoCliente {
     SQLiteDatabase sqlEscrever;
@@ -153,14 +154,15 @@ public class DaoCliente implements MetodoCliente {
         cursor.close();
         return cliente;
     }
-    public boolean inserirFotosBanco(String cpfCliente, byte[] foto1, byte[] foto2, byte[] foto3, byte[] foto4) {
+    public boolean inserirFotosBanco(ModelCliente mCliente) {
         ContentValues clientes = new ContentValues();
-
+        String[] whereArgs = {mCliente.getCliCPF()};
         try {
-            clientes.put("cliFotoUm", foto1);
-            clientes.put("cliFotoDois", foto2);
-            clientes.put("cliFotoTres", foto3);
-            clientes.put("cliFotoQuatro", foto4);
+            clientes.put("cliCPF", mCliente.getCliCPF());
+            clientes.put("cliFotoUm", mCliente.getCliFotoUm());
+            clientes.put("cliFotoDois", mCliente.getCliFotoDois());
+            clientes.put("cliFotoTres", mCliente.getCliFotoTres());
+            clientes.put("cliFotoQuatro", mCliente.getCliFotoQuatro());
 
             sqlEscrever.insert(SQLite.TABELA_FOTOS, null, clientes);
             return true;
@@ -176,30 +178,35 @@ public class DaoCliente implements MetodoCliente {
         return stream.toByteArray();
     }
 
-    public ModelCliente buscarFotosCliente(String cpf) {
-        String query = "SELECT cliFotoUm, cliFotoDois, cliFotoTres, cliFotoQuatro FROM " + SQLite.TABELA_FOTOS + " WHERE cliCPF = ?";
-        String[] selectionArgs = { cpf };
-        Cursor cursor = sqlLeitura.rawQuery(query, selectionArgs);
+    public List<ModelCliente> buscarFotosCliente(ModelCliente mCliente) {
+        List<ModelCliente> listaClientes = new ArrayList<>();
+        String cpf = mCliente.getCliCPF();
 
-        ModelCliente cliente = null;
-        if (cursor.moveToFirst()) {
-            cliente = new ModelCliente();
+        if (cpf != null && !cpf.isEmpty()) {
+            String[] whereArgs = {cpf};
+            String query = "SELECT cliFotoUm, cliFotoDois, cliFotoTres, cliFotoQuatro FROM " + SQLite.TABELA_FOTOS + " WHERE cliCPF = ?";
+            Cursor cursor = sqlLeitura.rawQuery(query, whereArgs);
 
-            byte[] fotoUmBytes = cursor.getBlob(cursor.getColumnIndexOrThrow("cliFotoUm"));
-            byte[] fotoDoisBytes = cursor.getBlob(cursor.getColumnIndexOrThrow("cliFotoDois"));
-            byte[] fotoTresBytes = cursor.getBlob(cursor.getColumnIndexOrThrow("cliFotoTres"));
-            byte[] fotoQuatroBytes = cursor.getBlob(cursor.getColumnIndexOrThrow("cliFotoQuatro"));
+            while (cursor.moveToNext()) {
+                ModelCliente cliente = new ModelCliente();
 
-            cliente.setCliFotoUm(fotoUmBytes);
-            cliente.setCliFotoDois(fotoDoisBytes);
-            cliente.setCliFotoTres(fotoTresBytes);
-            cliente.setCliFotoQuatro(fotoQuatroBytes);
+                byte[] fotoUmBytes = cursor.getBlob(cursor.getColumnIndexOrThrow("cliFotoUm"));
+                byte[] fotoDoisBytes = cursor.getBlob(cursor.getColumnIndexOrThrow("cliFotoDois"));
+                byte[] fotoTresBytes = cursor.getBlob(cursor.getColumnIndexOrThrow("cliFotoTres"));
+                byte[] fotoQuatroBytes = cursor.getBlob(cursor.getColumnIndexOrThrow("cliFotoQuatro"));
+                cliente.setCliCPF(cpf);
+                cliente.setCliFotoUm(fotoUmBytes);
+                cliente.setCliFotoDois(fotoDoisBytes);
+                cliente.setCliFotoTres(fotoTresBytes);
+                cliente.setCliFotoQuatro(fotoQuatroBytes);
+
+                listaClientes.add(cliente);
+            }
+            cursor.close();
         }
 
-        cursor.close();
-        return cliente;
+        return listaClientes;
     }
-
 
 }
 

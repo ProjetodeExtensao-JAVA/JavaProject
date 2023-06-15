@@ -32,10 +32,10 @@ public class SQLite extends SQLiteOpenHelper {
         String sqlFotos = "CREATE TABLE IF NOT EXISTS " + TABELA_FOTOS +
                 "(id INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "cliCPF TEXT," +
-                "cliFotoUm byte," +
-                "cliFotoDois byte," +
-                "cliFotoTres byte," +
-                "cliFotoQuatro byte," +
+                "cliFotoUm blob NOT NULL," +
+                "cliFotoDois blob NOT NULL," +
+                "cliFotoTres blob NOT NULL," +
+                "cliFotoQuatro blob NOT NULL," +
                 "FOREIGN KEY(cliCPF) REFERENCES " + TABELA_CLIENTE + "(cliCPF))";
 
         try {
